@@ -11,7 +11,7 @@ module.exports = function( grunt ) {
 			options: {
 				textdomain: "yelp-polls",
 			},
-			Update_All_Domains: {
+			updateAllDomains: {
 				options: {
 					updateDomains: true
 				},
@@ -19,8 +19,8 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		Wp_Readme_To_Markdown: {
-			Your_Target: {
+		wpReadmeToMarkdown: {
+			yourTarget: {
 				files: {
 					"README.md": "readme.txt"
 				}
