@@ -3,7 +3,7 @@
 		* Plugin Name:       Yelp Polls
 		* Plugin URI:        https://github.com/allen-mckenzie/yelp-polls
 		* Description:       Create custom polls using Yelp and Straw Polls
-		* Version:           0.0.1
+		* Version:           0.0.2
 		* Requires at least: 5.5
 		* Requires PHP:      7.4
 		* Author:            Allen McKenzie
