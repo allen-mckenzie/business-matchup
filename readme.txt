@@ -17,8 +17,8 @@ Yelp Polls helps you generate content by allowing you to specify a specific loca
 
 == Installation ==
 
-1. Download the latest release version and unzip the contents in to the `/wp-contnet/plugins/` directory and make sure the name of the new folder is `yelp-polls`
-1. Activate the plugin through the 'Plugins' menu in WordPress
+1.  Download the latest release version and unzip the contents in to the `/wp-contnet/plugins/` directory and make sure the name of the new folder is `yelp-polls`
+2.  Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
 
@@ -26,7 +26,7 @@ Yelp Polls helps you generate content by allowing you to specify a specific loca
 
 The Yelp API integration has not been added yet. This is a development release.
 
-= What about my StrawPoll API Key? =
+= What about my StrawPoll API Key =
 
 The StrawPoll integration has not been added yet. This is a development release.
 
