@@ -103,13 +103,7 @@
 
 			public function save( $post_id ) {
 
-				if ( null != ( filter_input( INPUT_POST, 'yelp_polls_metabox_nonce') ) ) {
-					return $post_id;
-				}
-
-				$nonce = $_POST['yelp_polls_metabox_nonce'];
-
-				if ( ! wp_verify_nonce( $nonce, 'yelp_polls_metabox' ) ) {
+				if ( ! wp_verify_nonce( filter_input( INPUT_POST, 'yelp_polls_metabox_nonce'), 'yelp_polls_metabox' ) ) {
 					return $post_id;
 				}
 
@@ -138,10 +132,10 @@
 
 				?>
 				<label for="yelp-polls-location">
-					<?php esc_attr_e( 'City, State Abbreviate. Example: San Francisco, CA', 'yelp-polls' ); ?>
+					<?php esc_html_e( 'City, State Abbreviate. Example: San Francisco, CA', 'yelp-polls' ); ?>
 				</label>
 					
-				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-location" value="<?php print esc_attr( $location ); ?>" /> 
+				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-location" value="<?php esc_html_e( $location ); ?>" /> 
 				<?php
 			}
 
@@ -151,10 +145,10 @@
 
 				?>
 				<label for="yelp-polls-type">
-					<?php esc_attr_e( 'Entertainment, Restaurant, Fine Dining, Pizza, etc...', 'yelp-polls' ); ?>
+					<?php esc_html_e( 'Entertainment, Restaurant, Fine Dining, Pizza, etc...', 'yelp-polls' ); ?>
 				</label>
 
-				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-type" value="<?php print esc_attr( $type ); ?>" />
+				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-type" value="<?php esc_html_e( $type ); ?>" />
 
 				<?php
 			}
