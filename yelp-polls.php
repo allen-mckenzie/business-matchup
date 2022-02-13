@@ -17,7 +17,7 @@
 		* @package         Yelp_Polls
 	*/
 
-	if( !defined( 'ABSPATH' ) ) exit; // None shall pass
+	if( !defined( 'ABSPATH' ) ) return; // None shall pass
 
 	if ( !class_exists( 'Yelp_Polls_Plugin' ) ) {
 		class Yelp_Polls {
@@ -26,11 +26,6 @@
 				add_action( 'init', array( $this, 'yelp_polls_cpt' ) );
 				add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 				add_action( 'save_post',      array( $this, 'save'         ) );
-			}
-
-			function yelp_polls_init() {
-				register_activation_hook( __FILE__, 'yelp_polls_activate' );
-				register_deactivation_hook( __FILE__, 'yelp_polls_deactivate' );
 			}
 
 			function yelp_polls_cpt() {
@@ -108,7 +103,7 @@
 
 			public function save( $post_id ) {
 
-				if ( ! isset( $_POST['yelp_polls_metabox_nonce'] ) ) {
+				if ( null != ( filter_input( INPUT_POST, 'yelp_polls_metabox_nonce') ) ) {
 					return $post_id;
 				}
 
@@ -122,18 +117,14 @@
 					return $post_id;
 				}
 
-				if ( 'page' == $_POST['yelppoll'] ) {
+				if ( 'page' == filter_input( INPUT_POST, 'yelppoll') ) {
 					if ( ! current_user_can( 'edit_page', $post_id ) ) {
-						return $post_id;
-					}
-				} else {
-					if ( ! current_user_can( 'edit_post', $post_id ) ) {
 						return $post_id;
 					}
 				}
 
-				$yelp_polls_location = sanitize_text_field( $_POST['yelp-polls-location'] );
-				$yelp_polls_type = sanitize_text_field( $_POST['yelp-polls-type'] );
+				$yelp_polls_location = sanitize_text_field( filter_input( INPUT_POST, 'yelp-polls-location') );
+				$yelp_polls_type = sanitize_text_field( filter_input( INPUT_POST, 'yelp-polls-type') );
 
 				update_post_meta( $post_id, '_yelp_polls_location', $yelp_polls_location );
 				update_post_meta( $post_id, '_yelp_polls_type', $yelp_polls_type );
@@ -147,10 +138,10 @@
 
 				?>
 				<label for="yelp-polls-location">
-					<?php _e( 'City, State Abbreviate. Example: San Francisco, CA', 'yelp-polls' ); ?>
+					<?php esc_attr_e( 'City, State Abbreviate. Example: San Francisco, CA', 'yelp-polls' ); ?>
 				</label>
 					
-				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-location" value="<?php echo esc_attr( $location ); ?>" /> 
+				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-location" value="<?php print esc_attr( $location ); ?>" /> 
 				<?php
 			}
 
@@ -160,21 +151,14 @@
 
 				?>
 				<label for="yelp-polls-type">
-					<?php _e( 'Entertainment, Restaurant, Fine Dining, Pizza, etc...', 'yelp-polls' ); ?>
+					<?php esc_attr_e( 'Entertainment, Restaurant, Fine Dining, Pizza, etc...', 'yelp-polls' ); ?>
 				</label>
 
-				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-type" value="<?php echo esc_attr( $type ); ?>" />
+				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-type" value="<?php print esc_attr( $type ); ?>" />
 
 				<?php
 			}
 			
-			function yelp_polls_activate() {
-				Yelp_Polls::yelp_polls_cpt();
-			}
-
-			function yelp_polls_deactivate() {
-
-			}
 		}
 
 		$yelpPolls = new Yelp_Polls;
