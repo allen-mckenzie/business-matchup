@@ -5,7 +5,7 @@
 **Requires at least:** 5.5  
 **Tested up to:** 5.9  
 **Requires PHP:** 7.4  
-**Stable tag:** 0.0.1  
+**Stable tag:** 0.0.2  
 **License:** GPLv3 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -39,3 +39,7 @@ This development release is not yet fully documented.
 ### 0.0.1 ###
 
 This is the initial shell for the plugin. It creates the custom post type and metaboxes that will be used by the API integrations later.
+
+### 0.0.2 ###
+
+Code audit to properly escape and filter outputs using best practices ( Issues flagged by Codacy )
