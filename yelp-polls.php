@@ -19,13 +19,39 @@
 
 	if( !defined( 'ABSPATH' ) ) return; // None shall pass
 
+	define( 'YELP_POLLS__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
 	if ( !class_exists( 'Yelp_Polls_Plugin' ) ) {
 		class Yelp_Polls {
 
 			function __construct() {
+				add_action( 'admin_menu', array( $this, 'yp_menu' ) );
+				register_activation_hook( __FILE__, [ $this, 'activate' ] );
 				add_action( 'init', array( $this, 'yelp_polls_cpt' ) );
 				add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 				add_action( 'save_post',      array( $this, 'save'         ) );
+				require( YELP_POLLS__PLUGIN_DIR . 'includes/classes/class-api.php' );
+				add_filter( 'generate_sidebar_layout', 'yelp_polls_sidebar_layout' );
+				add_filter('the_content', array( $this, 'yelp_polls_content' ) );
+				add_action( 'wp_enqueue_scripts', array( $this, 'yelp_polls_styles' ) );
+			}
+
+			public function activate() {
+				flush_rewrite_rules();
+			}
+
+			function yelp_polls_styles() {
+				wp_enqueue_style( 'my-movie-style', plugin_dir_url(__FILE__).'includes/css/yelp-polls.css' );
+			}
+
+			function yelp_polls_sidebar_layout( $layout ) {
+				$post_types = array( 'yelppolls' );
+			
+				if ( in_array( get_post_type(), $post_types ) ) {
+					return 'no-sidebar';
+				}
+			
+				return $layout;
 			}
 
 			function yelp_polls_cpt() {
@@ -119,7 +145,15 @@
 
 				$yelp_polls_location = sanitize_text_field( filter_input( INPUT_POST, 'yelp-polls-location') );
 				$yelp_polls_type = sanitize_text_field( filter_input( INPUT_POST, 'yelp-polls-type') );
-
+				$postID = sanitize_text_field( filter_input( INPUT_POST, 'post_ID') );
+				$has_poll = get_post_meta( $postID, '_yelp_polls_poll', true );
+				if( null === $has_poll ) {
+					return;
+				}
+				if( $has_poll === '' ) {
+					$yelp_polls_poll = $this->addPoll( $postID, $yelp_polls_type, $yelp_polls_location );
+					update_post_meta( $post_id, '_yelp_polls_poll', $yelp_polls_poll );
+				}
 				update_post_meta( $post_id, '_yelp_polls_location', $yelp_polls_location );
 				update_post_meta( $post_id, '_yelp_polls_type', $yelp_polls_type );
 			}
@@ -142,6 +176,7 @@
 			public function render_meta_box_type_content( $post ) {
 
 				$type = get_post_meta( $post->ID, '_yelp_polls_type', true );
+				$location = get_post_meta( $post->ID, '_yelp_polls_location', true );
 
 				?>
 				<label for="yelp-polls-type">
@@ -151,9 +186,172 @@
 				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-type" value="<?php esc_html_e( $type ); ?>" />
 
 				<?php
+				$has_poll = get_post_meta( $post->ID, '_yelp_polls_poll', true );
+				?>
+				<input style="width:100%;" type="hidden" class="form-control" name="yelp-polls-poll" value="<?php esc_html_e( $has_poll ); ?>" />
+				<?php
 			}
-			
-		}
 
+			public function createPoll( $poll_json ) {
+				$url = 'https://strawpoll.com/api/poll';
+				$post_data = $poll_json;
+				$headers = array(
+					'user-agent' => '',
+					'Content-Type' => 'application/json',
+					'API-KEY' => STRAWPOLL_API_KEY
+				);
+				$args = array(
+					'method' => 'POST',
+					'timeout' => 0,
+					'headers' => $headers,
+					'blocking'    => true,
+					'body' => $post_data,
+					'data_format' => 'body'
+				);
+				$response = wp_remote_request( $url, $args );
+				$response_body = wp_remote_retrieve_body( $response );
+				$response_body = json_decode( $response_body, true);
+				if( isset( $response_body['content_id'] ) ) {
+					$pollID = $response_body['content_id'];
+				} else {
+					$pollID = null;
+				}
+				$html = '<iframe src="https://strawpoll.com/embed/' . $pollID . '" style="width: 75%;height: 100%;margin: 0 16.5% !important;padding-top: 20px;min-height: 640px;" frameborder="0" allowfullscreen></iframe>';
+				return $html;
+			}
+
+			function addPoll( $postID, $term, $location ) {
+				$yelpAPI = new Yelp_API();
+				//$term = "Entertainment";
+				//$location = "Eugene, OR";
+				$response = $yelpAPI->search( $term, $location );
+				if( null === $response) {
+					return;
+				}
+				$response_body = wp_remote_retrieve_body( $response );
+				update_post_meta( $postID, '_yelp_polls_yelp_results', $response_body );
+				$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
+				var_dump($response_body);die();
+				$pollitems = $yelpAPI->buildPollItems($response_body);
+				$location_array = explode(",",$location);
+				$city = $location_array[0];
+				$answers = array();
+				foreach($pollitems as $answer) {
+					$answers[] = $answer['name'];
+				}
+				$poll_array = array( 
+					"poll" => array(
+						"title" => "Which of these $term locations near $city do you think is the best?",
+						"answers" => $answers,
+						"priv" => false,
+						"ma" => false,
+						"mip" => true,
+						"enter_name" => true,
+						"only_reg" => false
+					)
+				);
+				$poll_json = json_encode( $poll_array );
+				$pollHTML = $this->createPoll( $poll_json );
+				return $pollHTML;
+			}
+
+			function yelp_polls_content($content) {
+				$yelpAPI = new Yelp_API();
+				global $post;
+				$postID = $post->ID;
+				$type = get_post_meta( $postID, '_yelp_polls_type', true );
+				$location = get_post_meta( $postID, '_yelp_polls_location', true );
+				$poll = get_post_meta( $postID, '_yelp_polls_poll', true );
+				$location_array = explode(",",$location);
+				$city = $location_array[0];
+				$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
+				$pollitems = $yelpAPI->buildPollItems($response_body);
+				if ($post->post_type == 'yelppoll') {
+					$content = '
+						<h1> '.$type.' locations near '.$city.'</h1>
+						<hr/>
+						<section class="yelp-polls-content">
+							<div class="cards">
+								<div class="card">'.$yelpAPI->cardContent( $pollitems, 0 ).'</div>
+								<div class="card">'.$yelpAPI->cardContent( $pollitems, 1 ).'</div>
+								<div class="card">'.$yelpAPI->cardContent( $pollitems, 2 ).'</div>
+							</div>
+						</section>
+					';
+					$content .= $poll;
+				}
+				return $content;
+			}
+
+			function yp_menu() {
+				$mainPageHook = add_menu_page( 'Yelp Poll', 'Yelp Poll', 'manage_options', 'ypmenu', array( $this, 'ypForm' ), 'dashicons-admin-generic', 0 );
+				add_submenu_page( 'ypmenu', 'Words To Filter', 'Settings', 'manage_options', 'ypmenu', array( $this, 'ypForm' ) );
+				add_action( 'admin_init', array( $this, 'settings' ) );
+			}
+	
+			function settings() {
+				add_settings_section( 'yelp_polls_replacements_section', null, null, 'ypmenu-options' );
+				register_setting( 'replacementFields', 'replacementText' );
+				add_settings_field( 'replacement-text', 'Filtered Text', array( $this, 'replaceHTML'), 'ypmenu-options', 'yelp_polls_replacements_section' );
+			}
+
+			function handleForm() {
+				if ( wp_verify_nonce( $_POST['nonce'], 'yelp_polls' ) AND current_user_can( 'manage_options' ) ) {
+					update_option( 'yelp_polls_yelp_api', sanitize_text_field( $_POST['yelp_api_key'] ) );
+					update_option( 'yelp_polls_straw_poll_api', sanitize_text_field( $_POST['straw_poll_api_key'] ) );
+					?>
+						<div class="updated">
+							<p>Your API Key's were saved.</p>
+						</div>
+					<?php
+				} else {
+					?>
+						<div class="error">
+							<p>
+								Uh uh uh, you didn't say the magic word
+							</p>
+						</div>
+					<?php
+				}
+			}
+	
+			function ypForm() {
+				?>
+					<div class="wrap">
+						<h1>Yelp Polls</h1>
+						<?php if ($_POST['justsubmitted'] == "true") $this->handleForm() ?>
+						<form method="POST">
+							<input type="hidden" name="justsubmitted" value="true">
+							<?php wp_nonce_field( 'yelp_polls', 'nonce' ); ?>
+							<label for="yelp_api_key"><p>Enter your Yelp API Key</p>
+							<div class="yelp_polls__flex-container">    
+								<input name="yelp_api_key" id="yelp_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php echo esc_textarea( get_option( 'yelp_polls_yelp_api' ) ); ?>" />
+							</div>
+							<label for="straw_poll_api_key"><p>Enter your Straw Poll API Key</p>
+							<div class="yelp_polls__flex-container">
+								<input name="straw_poll_api_key" id="straw_poll_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php echo esc_textarea( get_option( 'yelp_polls_straw_poll_api' ) ); ?>" />
+							</div>
+							<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
+						</form>
+					</div>
+				<?php
+			}
+	
+			function optionsSubPage() {
+				?>
+					<div class="wrap">
+						<h1>Yelp Polls Options</h1>
+						<form action="options.php" method="POST">
+							<?php
+								settings_fields( 'replacementFields' );
+								do_settings_sections( 'ypmenu-options' );
+								submit_button();
+							?>
+						</form>
+					</div>
+				<?php
+			}
+
+		}
 		$yelpPolls = new Yelp_Polls;
 	}
