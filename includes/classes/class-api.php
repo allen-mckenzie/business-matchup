@@ -75,7 +75,7 @@
 			if( isset( $response_body['content_id'] ) ) {
 				$pollID = $response_body['content_id'];
 			}
-			$html = '<iframe src="https://strawpoll.com/embed/' . $pollID . '" style="width: 75%;height: 100%;margin: 0 16.5% !important;padding-top: 20px;min-height: 640px;" frameborder="0" allowfullscreen></iframe>';
+			$html = '<iframe src="https://strawpoll.com/embed/' . $pollID . 'class="strawpolls-content" frameborder="0" allowfullscreen></iframe>';
 			return $html;
 		}
 
