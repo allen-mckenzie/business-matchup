@@ -322,11 +322,11 @@
 						<?php wp_nonce_field( 'yelp_polls', 'nonce' ); ?>
 						<label for="yelp_api_key"><p>Enter your Yelp API Key</p>
 						<div class="yelp_polls__flex-container">    
-							<input style="width:100%" name="yelp_api_key" id="yelp_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'yelp_polls_yelp_api' ) ) ); ?>" />
+							<input style="width:100%" name="yelp_api_key" id="yelp_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'yelp_polls_yelp_api' ) ), 'yelp-polls' ); ?>" />
 						</div>
 						<label for="straw_poll_api_key"><p>Enter your Straw Poll API Key</p>
 						<div class="yelp_polls__flex-container">
-							<input style="width:100%" name="straw_poll_api_key" id="straw_poll_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'yelp_polls_straw_poll_api' ) ) ); ?>" />
+							<input style="width:100%" name="straw_poll_api_key" id="straw_poll_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'yelp_polls_straw_poll_api' ) ), 'yelp-polls' ); ?>" />
 						</div>
 						<br style="padding-bottom: 20px;"/>
 						<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">

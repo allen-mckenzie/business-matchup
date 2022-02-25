@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Yelp Polls 0.0.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yelp-polls\n"
-"POT-Creation-Date: 2022-02-25 15:27:58+00:00\n"
+"POT-Creation-Date: 2022-02-25 21:50:20+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,60 +24,68 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: yelp-polls.php:63
+#: yelp-polls.php:110
 msgid "Add New"
 msgstr ""
 
-#: yelp-polls.php:64
+#: yelp-polls.php:111
 msgid "Add New Yelp Poll"
 msgstr ""
 
-#: yelp-polls.php:65
+#: yelp-polls.php:112
 msgid "New Yelp Poll"
 msgstr ""
 
-#: yelp-polls.php:66
+#: yelp-polls.php:113
 msgid "Edit Yelp Poll"
 msgstr ""
 
-#: yelp-polls.php:67
+#: yelp-polls.php:114
 msgid "View Yelp Poll"
 msgstr ""
 
-#: yelp-polls.php:68
+#: yelp-polls.php:115
 msgid "All Polls"
 msgstr ""
 
-#: yelp-polls.php:69
+#: yelp-polls.php:116
 msgid "Search Yelp Polls"
 msgstr ""
 
-#: yelp-polls.php:70
+#: yelp-polls.php:117
 msgid "Parent Yelp Polls:"
 msgstr ""
 
-#: yelp-polls.php:71
+#: yelp-polls.php:118
 msgid "No Yelp Polls found."
 msgstr ""
 
-#: yelp-polls.php:72
+#: yelp-polls.php:119
 msgid "No Yelp Polls found in Trash."
 msgstr ""
 
-#: yelp-polls.php:109
+#: yelp-polls.php:156
 msgid "Business Location"
 msgstr ""
 
-#: yelp-polls.php:120
+#: yelp-polls.php:167
 msgid "Business Type"
 msgstr ""
 
-#: yelp-polls.php:169
+#: yelp-polls.php:216
 msgid "City, State Abbreviate. Example: San Francisco, CA"
 msgstr ""
 
-#: yelp-polls.php:183
+#: yelp-polls.php:230
 msgid "Entertainment, Restaurant, Fine Dining, Pizza, etc..."
+msgstr ""
+
+#: yelp-polls.php:287
+msgid "Your API Key's were saved."
+msgstr ""
+
+#: yelp-polls.php:295
+msgid "Uh uh uh... you didn\\t say the magic word..."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
@@ -100,79 +108,79 @@ msgstr ""
 msgid "https://github.com/allen-mckenzie"
 msgstr ""
 
-#: yelp-polls.php:59
+#: yelp-polls.php:106
 msgctxt "Post type general name"
 msgid "Yelp Polls"
 msgstr ""
 
-#: yelp-polls.php:60
+#: yelp-polls.php:107
 msgctxt "Post type singular name"
 msgid "Yelp Poll"
 msgstr ""
 
-#: yelp-polls.php:61
+#: yelp-polls.php:108
 msgctxt "Admin Menu text"
 msgid "Yelp Polls"
 msgstr ""
 
-#: yelp-polls.php:62
+#: yelp-polls.php:109
 msgctxt "Add New on Toolbar"
 msgid "Yelp Poll"
 msgstr ""
 
-#: yelp-polls.php:73
+#: yelp-polls.php:120
 msgctxt "Overrides the “Featured Image” phrase for this post type. Added in 4.3"
 msgid "Yelp Poll Cover Image"
 msgstr ""
 
-#: yelp-polls.php:74
+#: yelp-polls.php:121
 msgctxt "Overrides the “Set featured image” phrase for this post type. Added in 4.3"
 msgid "Set cover image"
 msgstr ""
 
-#: yelp-polls.php:75
+#: yelp-polls.php:122
 msgctxt ""
 "Overrides the “Remove featured image” phrase for this post type. Added in "
 "4.3"
 msgid "Remove cover image"
 msgstr ""
 
-#: yelp-polls.php:76
+#: yelp-polls.php:123
 msgctxt ""
 "Overrides the “Use as featured image” phrase for this post type. Added in "
 "4.3"
 msgid "Use as cover image"
 msgstr ""
 
-#: yelp-polls.php:77
+#: yelp-polls.php:124
 msgctxt ""
 "The post type archive label used in nav menus. Default “Post Archives”. "
 "Added in 4.4"
 msgid "Yelp Poll archives"
 msgstr ""
 
-#: yelp-polls.php:78
+#: yelp-polls.php:125
 msgctxt ""
 "Overrides the “Insert into post”/”Insert into page” phrase (used when "
 "inserting media into a post). Added in 4.4"
 msgid "Insert into Yelp Poll"
 msgstr ""
 
-#: yelp-polls.php:79
+#: yelp-polls.php:126
 msgctxt ""
 "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used "
 "when viewing media attached to a post). Added in 4.4"
 msgid "Uploaded to this Yelp Poll"
 msgstr ""
 
-#: yelp-polls.php:80
+#: yelp-polls.php:127
 msgctxt ""
 "Screen reader text for the filter links heading on the post type listing "
 "screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
 msgid "Filter Yelp Polls list"
 msgstr ""
 
-#: yelp-polls.php:81
+#: yelp-polls.php:128
 msgctxt ""
 "Screen reader text for the pagination heading on the post type listing "
 "screen. Default “Posts list navigation”/”Pages list navigation”. Added in "
@@ -180,7 +188,7 @@ msgctxt ""
 msgid "Yelp Polls list navigation"
 msgstr ""
 
-#: yelp-polls.php:82
+#: yelp-polls.php:129
 msgctxt ""
 "Screen reader text for the items list heading on the post type listing "
 "screen. Default “Posts list”/”Pages list”. Added in 4.4"
