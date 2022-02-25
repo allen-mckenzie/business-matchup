@@ -1,7 +1,23 @@
 <?php
 
+	/**
+	 * Yelp_Polls_Page class
+	 * This class contains the functions needed to create and display the content for our custom post type.
+	 * 
+	 * @since 0.0.3
+	 */
     class Yelp_Polls_Page {
 
+		/**
+		 * yelp_polls_content function
+		 * This function displays the gathered information from the Yelp API and Straw Poll API based on the 
+		 * information provided in the custom metaboxes for the content of the Custom Post Type Front End.
+		 * 
+		 * @since 0.0.2
+		 * 
+		 * @param array $content is the array containing the page content for the given post.
+		 * @return array $content for the custom post type after generating it from the data we retrieved.
+		 */
         public function yelp_polls_content($content) {
 			global $post;
 			$postID = $post->ID;
@@ -31,6 +47,15 @@
 			return $content;
 		}
 
+		/**
+		 * buildPollItems function
+		 * This function creates an array of poll items to pass on to the create cards function.
+		 * 
+		 * @since 0.0.3
+		 * 
+		 * @param array $results contains the array of information retrieved from the Yelp API
+		 * @return array $pollitems with a new array with the information we need when creating the cards.
+		 */
 		function buildPollItems( $results ) {
 			$pollitems = array();
 			$count = 1;
@@ -79,6 +104,16 @@
 			return $pollitems; 
 		}
 
+		/**
+		 * cardContent function
+		 * This function creates the display markup for each of the 3 cards we will be displaying.
+		 * 
+		 * @since 0.0.3
+		 * 
+		 * @param array $pollitems contains an array of items built by buildPollItems.
+		 * @param integer $index contains the current index of the card being created.
+		 * @return string $html contains the generated markup to be displayed for the current card item in the index.
+		 */
 		function cardContent( $pollitems, $index ) {
 			$rating_images = array(
 				0 => 'regular_0.png',
