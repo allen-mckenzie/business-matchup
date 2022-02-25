@@ -14,7 +14,7 @@
 
 	class Yelp_API {
 
-		public function doAPI( $api_url, $path, $url_params = array() ) {
+		function doAPI( $api_url, $path, $url_params = array() ) {
 			$query = http_build_query( $url_params );
 			$api_url = $api_url."".$path."?".$query;
 			$api_key = API_KEY;
@@ -33,7 +33,7 @@
 			return $response;
 		}
 
-		public function search( $term, $businessLocation ) {
+		function search( $term, $businessLocation ) {
 			$url_params = array();
 			$url_params['term'] = $term;
 			$url_params['location'] = $businessLocation;
@@ -42,18 +42,18 @@
 			return $result;
 		}
 
-		public function get_business( $business_id ) {
+		function get_business( $business_id ) {
 			$business_path = BUSINESS_PATH . urlencode($business_id);
 			return $this->doAPI(API_HOST, $business_path);
 		}
 	
-		public function query_api( $term, $businessLocation ) {     
+		function query_api( $term, $businessLocation ) {     
 			$response = json_decode(search($term, $businessLocation));
 			$pretty_response = json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 			return $this->$pretty_response;
 		}
 
-		public function buildPollItems( $results ) {
+		function buildPollItems( $results ) {
 			$pollitems = array();
 			$count = 1;
 			foreach( $results as $result ) {
@@ -101,7 +101,7 @@
 			return $pollitems; 
 		}
 
-		public function cardContent( $pollitems, $index ) {
+		function cardContent( $pollitems, $index ) {
 			$rating_images = array(
 				0 => 'regular_0.png',
 				1 => 'regular_1.png',

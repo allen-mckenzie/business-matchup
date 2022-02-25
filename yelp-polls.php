@@ -40,7 +40,7 @@
 				add_action( 'wp_enqueue_scripts', array( $this, 'yelp_polls_styles' ) );
 			}
 
-			public function activate() {
+			function activate() {
 				flush_rewrite_rules();
 			}
 
@@ -104,7 +104,7 @@
 				register_post_type( 'yelp-polls', $args );
 			}
 		
-			public function add_meta_box( $post_type ) {
+			function add_meta_box( $post_type ) {
 				$post_types = array( 'yelp-polls' );
 
 				if ( in_array( $post_type, $post_types ) ) {
@@ -131,7 +131,7 @@
 
 			}
 
-			public function save( $post_id ) {
+			function save( $post_id ) {
 
 				if ( ! wp_verify_nonce( filter_input( INPUT_POST, 'yelp_polls_metabox_nonce'), 'yelp_polls_metabox' ) ) {
 					return $post_id;
@@ -162,7 +162,7 @@
 				update_post_meta( $post_id, '_yelp_polls_type', $yelp_polls_type );
 			}
 
-			public function render_meta_box_location_content( $post ) {
+			function render_meta_box_location_content( $post ) {
 
 				wp_nonce_field( 'yelp_polls_metabox', 'yelp_polls_metabox_nonce' );
 
@@ -177,7 +177,7 @@
 				<?php
 			}
 
-			public function render_meta_box_type_content( $post ) {
+			function render_meta_box_type_content( $post ) {
 
 				$type = get_post_meta( $post->ID, '_yelp_polls_type', true );
 				// $bizLoc = get_post_meta( $post->ID, '_yelp_polls_business_location', true );
@@ -196,7 +196,7 @@
 				<?php
 			}
 
-			public function createPoll( $poll_json ) {
+			function createPoll( $poll_json ) {
 				$url = 'https://strawpoll.com/api/poll';
 				$post_data = $poll_json;
 				$headers = array(
