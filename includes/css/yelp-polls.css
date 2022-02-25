@@ -1,6 +1,9 @@
+/** Post Title **/
 header.entry-header {
   display: none;
 }
+
+/** Yelp Content **/
 .yelp-polls-content {
   width: 100%;
   max-width: 1200px;
