@@ -31,17 +31,19 @@
 			function __construct() {
 				require( YELP_POLLS__PLUGIN_DIR . 'includes/classes/class-api.php' );
 				add_action( 'admin_menu', array( $this, 'yp_menu' ) );
-				register_activation_hook( __FILE__, [ $this, 'activate' ] );
 				add_action( 'init', array( $this, 'yelp_polls_cpt' ) );
 				add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 				add_action( 'save_post',      array( $this, 'save'         ) );
 				add_filter( 'generate_sidebar_layout', 'yelp_polls_sidebar_layout' );
 				add_filter('the_content', array( $this, 'yelp_polls_content' ) );
 				add_action( 'wp_enqueue_scripts', array( $this, 'yelp_polls_styles' ) );
+				register_activation_hook( __FILE__, [ $this, 'activate' ] );
 			}
 
 			function activate() {
-				update_option('plugin_permalinks_flushed', 0);
+				delete_option('rewrite_rules');
+				global $wp_rewrite;
+    			$wp_rewrite->flush_rules();
 			}
 
 			function yelp_polls_styles() {
@@ -102,6 +104,7 @@
 					'show_in_rest'       => true
 				);
 				register_post_type( 'yelp-polls', $args );
+				flush_rewrite_rules();
 			}
 		
 			function add_meta_box( $post_type ) {
