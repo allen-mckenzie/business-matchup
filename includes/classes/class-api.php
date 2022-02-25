@@ -80,7 +80,7 @@
 			$url_params['term'] = $term;
 			$url_params['location'] = $businessLocation;
 			$url_params['limit'] = SEARCH_LIMIT;
-			$result = Yelp_API::doAPI(API_HOST, SEARCH_PATH, $url_params);
+			$result = $this->doAPI(API_HOST, SEARCH_PATH, $url_params);
 			return $result;
 		}
 
@@ -95,7 +95,7 @@
 		 */
 		function get_business( $business_id ) {
 			$business_path = BUSINESS_PATH . urlencode($business_id);
-			return Yelp_API::doAPI(API_HOST, $business_path);
+			return $this->doAPI(API_HOST, $business_path);
 		}
 		
 		/**
@@ -111,7 +111,7 @@
 		function query_api( $term, $businessLocation ) {     
 			$response = json_decode(search($term, $businessLocation));
 			$pretty_response = json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-			return Yelp_API::$pretty_response;
+			return $this->$pretty_response;
 		}
 
 		/**
@@ -145,7 +145,7 @@
 			if( isset( $response_body['content_id'] ) ) {
 				$pollID = $response_body['content_id'];
 			}
-			$html = '<iframe src="https://strawpoll.com/embed/' . $pollID . 'class="strawpolls-content" frameborder="0" allowfullscreen></iframe>';
+			$html = '<iframe src="https://strawpoll.com/embed/' . $pollID . '" class="strawpolls-content" frameborder="0" allowfullscreen></iframe>';
 			return $html;
 		}
 
@@ -161,7 +161,8 @@
 		 * @return string $pollHTML is the formatted HTML containing our new poll.
 		 */
 		public function addPoll( $postID, $term, $bizLoc ) {
-			$response = Yelp_API::search( $term, $bizLoc );
+			$yelpAPI = new Yelp_API();
+			$response = $yelpAPI->search( $term, $bizLoc );
 			if( null === $response) {
 				return;
 			}
@@ -187,7 +188,7 @@
 				)
 			);
 			$poll_json = json_encode( $poll_array );
-			$pollHTML = Yelp_API::createPoll( $poll_json );
+			$pollHTML = $yelpAPI->createPoll( $poll_json );
 			return $pollHTML;
 		}
 
