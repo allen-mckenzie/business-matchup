@@ -41,7 +41,7 @@
 			}
 
 			function activate() {
-				flush_rewrite_rules();
+				update_option('plugin_permalinks_flushed', 0);
 			}
 
 			function yelp_polls_styles() {
