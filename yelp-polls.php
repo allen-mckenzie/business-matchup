@@ -265,8 +265,9 @@
 				$city = $bizLoc_array[0];
 				$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
 				$pollitems = $yelpAPI->buildPollItems($response_body);
+				$content = '<section id="yelp-polls">';
 				if ($post->post_type == 'yelp-polls') {
-					$content = '
+					$content .= '
 						<h1> '.$type.' locations near '.$city.'</h1>
 						<hr/>
 						<section class="yelp-polls-content">
@@ -278,6 +279,7 @@
 						</section>
 					';
 					$content .= $poll;
+					$content .= '</section>';
 				}
 				return $content;
 			}
@@ -294,24 +296,31 @@
 				add_settings_field( 'yelp_polls_text', 'Filtered Text', array( $this, 'yelp_fields'), 'yelp-polls-options', 'yelp_polls_settings_section' );
 			}
 
-			function handleForm() {
-				$message = '
-				<div class="error">
-					<p>
-						Uh uh uh, you didn\'t say the magic word
-					</p>
+			function handleForm_admin_notice__success() {
+				?>
+				<div class="notice notice-success is-dismissible">
+					<p><?php _e( 'Your API Key\'s were saved.', 'yelp-polls' ); ?></p>
 				</div>
-				';
+				<?php
+			}
+			
+			function handleForm_admin_notice__error() {
+				?>
+				<div class="notice notice-error">
+					<p><?php _e( 'Uh uh uh... you didn\t say the magic word...', 'yelp-polls' ); ?></p>
+				</div>
+				<?php
+			}
+
+			function handleForm() {
 				if ( wp_verify_nonce( filter_input( INPUT_POST, 'nonce'), 'yelp_polls' ) AND current_user_can( 'manage_options' ) ) {
 					update_option( 'yelp_polls_yelp_api', sanitize_text_field( filter_input( INPUT_POST, 'yelp_api_key') ) );
 					update_option( 'yelp_polls_straw_poll_api', sanitize_text_field( filter_input( INPUT_POST, 'straw_poll_api_key') ) );
-					$message = '
-						<div class="updated">
-							<p>Your API Key\'s were saved.</p>
-						</div>
-					';
+					add_action( 'admin_notices', 'handleForm_admin_notice__success' );
 				}
-				echo $message;
+				if ( !wp_verify_nonce( filter_input( INPUT_POST, 'nonce'), 'yelp_polls' ) AND !current_user_can( 'manage_options' ) ) {
+					add_action( 'admin_notices', 'handleForm_admin_notice__error' );
+				}
 			}
 	
 			function ypForm() {
