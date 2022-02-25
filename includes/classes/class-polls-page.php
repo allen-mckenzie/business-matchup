@@ -3,7 +3,6 @@
     class Yelp_Polls_Page {
 
         public function yelp_polls_content($content) {
-			// $yelpAPI = new Yelp_API();
 			global $post;
 			$postID = $post->ID;
 			$type = get_post_meta( $postID, '_yelp_polls_type', true );

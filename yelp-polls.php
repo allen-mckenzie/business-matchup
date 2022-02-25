@@ -36,7 +36,9 @@
 		);
 		Yelp_Polls::include_file( 'includes/classes/class-' . $filename );
 	}
+
 	spl_autoload_register( 'yelp_polls_autoload_classes' );
+	
 	define( 'YELP_POLLS__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 	final class Yelp_Polls {
