@@ -22,13 +22,14 @@
 	/**
 	 * Include our classes
 	 */
-	use includes\classes\Yelp_API;
+	//use includes\classes\Yelp_API;
 
 	define( 'YELP_POLLS__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 	if ( !class_exists( 'Yelp_Polls_Plugin' ) ) {
 		class Yelp_Polls {
 			function __construct() {
+				require( YELP_POLLS__PLUGIN_DIR . 'includes/classes/class-api.php' );
 				add_action( 'admin_menu', array( $this, 'yp_menu' ) );
 				register_activation_hook( __FILE__, [ $this, 'activate' ] );
 				add_action( 'init', array( $this, 'yelp_polls_cpt' ) );
@@ -179,7 +180,7 @@
 			public function render_meta_box_type_content( $post ) {
 
 				$type = get_post_meta( $post->ID, '_yelp_polls_type', true );
-				$bizLoc = get_post_meta( $post->ID, '_yelp_polls_business_location', true );
+				// $bizLoc = get_post_meta( $post->ID, '_yelp_polls_business_location', true );
 
 				?>
 				<label for="yelp-polls-type">
@@ -201,7 +202,7 @@
 				$headers = array(
 					'user-agent' => '',
 					'Content-Type' => 'application/json',
-					'API-KEY' => STRAWPOLL_API_KEY
+					'X-API-KEY' => STRAWPOLL_API_KEY
 				);
 				$args = array(
 					'method' => 'POST',
@@ -328,11 +329,11 @@
 							<?php wp_nonce_field( 'yelp_polls', 'nonce' ); ?>
 							<label for="yelp_api_key"><p>Enter your Yelp API Key</p>
 							<div class="yelp_polls__flex-container">    
-								<input name="yelp_api_key" id="yelp_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_textarea( get_option( 'yelp_polls_yelp_api' ) ); ?>" />
+								<input name="yelp_api_key" id="yelp_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php print esc_textarea( get_option( 'yelp_polls_yelp_api' ) ); ?>" />
 							</div>
 							<label for="straw_poll_api_key"><p>Enter your Straw Poll API Key</p>
 							<div class="yelp_polls__flex-container">
-								<input name="straw_poll_api_key" id="straw_poll_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_textarea( get_option( 'yelp_polls_straw_poll_api' ) ); ?>" />
+								<input name="straw_poll_api_key" id="straw_poll_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php print esc_textarea( get_option( 'yelp_polls_straw_poll_api' ) ); ?>" />
 							</div>
 							<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 						</form>
