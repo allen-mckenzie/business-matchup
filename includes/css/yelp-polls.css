@@ -68,11 +68,11 @@ iframe.strawpolls-content {
       grid-row: 1;
     }
 
-    .yelp-polls-content {
+    #yelp-polls-content {
       grid-row: 2;
     }
 
-    .strawpolls-content {
+    #strawpolls-content {
       grid-row: 3;
     }    
   }
