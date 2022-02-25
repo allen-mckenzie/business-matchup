@@ -299,7 +299,7 @@
 			function handleForm_admin_notice__success() {
 				?>
 				<div class="notice notice-success is-dismissible">
-					<p><?php _e( 'Your API Key\'s were saved.', 'yelp-polls' ); ?></p>
+					<p><?php esc_html_e( 'Your API Key\'s were saved.', 'yelp-polls' ); ?></p>
 				</div>
 				<?php
 			}
@@ -307,7 +307,7 @@
 			function handleForm_admin_notice__error() {
 				?>
 				<div class="notice notice-error">
-					<p><?php _e( 'Uh uh uh... you didn\t say the magic word...', 'yelp-polls' ); ?></p>
+					<p><?php esc_html_e( 'Uh uh uh... you didn\t say the magic word...', 'yelp-polls' ); ?></p>
 				</div>
 				<?php
 			}
