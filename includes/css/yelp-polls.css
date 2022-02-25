@@ -40,7 +40,7 @@ p.yelp-location a {
 }
 
 /** Strawpoll Content **/
-iframe# {
+iframe.strawpolls-content {
   width: 75%;
   height: 100%;
   margin: 0 16.5% !important;
@@ -49,5 +49,25 @@ iframe# {
 }
 
 /** Basic responsive layout for all browsers **/
+#yelp-polls {
+  max-width: 600px;
+  margin: 0 auto;
+}
 
 /** CSS Grid layout for modern browsers **/
+@supports (grid-area: auto) {
+  @media screen and (min-width: 600px) {
+    #yelp-polls {
+      max-width: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    #yelp-polls {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
