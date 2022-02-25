@@ -169,7 +169,7 @@
 					<?php esc_html_e( 'City, State Abbreviate. Example: San Francisco, CA', 'yelp-polls' ); ?>
 				</label>
 					
-				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-location" value="<?php esc_html_e( $location ); ?>" /> 
+				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-location" value="<?php esc_html_e( $location, 'yelp-polls' ); ?>" /> 
 				<?php
 			}
 
@@ -183,12 +183,12 @@
 					<?php esc_html_e( 'Entertainment, Restaurant, Fine Dining, Pizza, etc...', 'yelp-polls' ); ?>
 				</label>
 
-				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-type" value="<?php esc_html_e( $type ); ?>" />
+				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-type" value="<?php esc_html_e( $type, 'yelp-polls' ); ?>" />
 
 				<?php
 				$has_poll = get_post_meta( $post->ID, '_yelp_polls_poll', true );
 				?>
-				<input style="width:100%;" type="hidden" class="form-control" name="yelp-polls-poll" value="<?php esc_html_e( $has_poll ); ?>" />
+				<input style="width:100%;" type="hidden" class="form-control" name="yelp-polls-poll" value="<?php esc_html_e( $has_poll, 'yelp-polls' ); ?>" />
 				<?php
 			}
 
