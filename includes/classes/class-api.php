@@ -94,9 +94,8 @@
 					);
 					if( $count >= 3 ) {
 						return $pollitems;
-					} else {
-						$count++;
 					}
+					$count++;
 				}
 			}
 			return $pollitems; 
