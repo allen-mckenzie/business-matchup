@@ -33,10 +33,10 @@
 			return $response;
 		}
 
-		public function search( $term, $location ) {
+		public function search( $term, $businessLocation ) {
 			$url_params = array();
 			$url_params['term'] = $term;
-			$url_params['location'] = $location;
+			$url_params['location'] = $businessLocation;
 			$url_params['limit'] = SEARCH_LIMIT;
 			$result = $this->doAPI(API_HOST, SEARCH_PATH, $url_params);
 			return $result;
@@ -47,8 +47,8 @@
 			return $this->doAPI(API_HOST, $business_path);
 		}
 	
-		public function query_api( $term, $location ) {     
-			$response = json_decode(search($term, $location));
+		public function query_api( $term, $businessLocation ) {     
+			$response = json_decode(search($term, $businessLocation));
 			$pretty_response = json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 			return $this->$pretty_response;
 		}
@@ -61,10 +61,9 @@
 					$name = $item['name'];
 					$image = $item['image_url'];
 					$is_closed = $item['is_closed'];
+					$status = "Closed";
 					if(!$is_closed) {
 						$status = "Open";
-					} else {
-						$status = "Closed";
 					}
 					$url = $item['url'];
 					$reviews = $item['review_count'];
@@ -77,7 +76,7 @@
 					} else {
 						$price = "$";
 					}
-					$location = $item['location']['display_address'];
+					$businessLocation = $item['location']['display_address'];
 					$phone_link = $item['phone'];
 					$phone = $item['display_phone'];
 					$rating = $item['rating'];
@@ -89,7 +88,7 @@
 						"reviews" => $reviews,
 						"tags" => $tags,
 						"price" => $price,
-						"location" => $location,
+						"location" => $businessLocation,
 						"phone_link" => $phone_link,
 						"phone" => $phone,
 						"rating" => $rating
