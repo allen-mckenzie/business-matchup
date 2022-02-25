@@ -256,9 +256,9 @@
 					<hr/>
 					<section class="yelp-polls-content">
 						<div class="cards">
-							<div class="card">'.Yelp_Polls_Page::cardContent( $pollitems, 0 ).'</div>
-							<div class="card">'.Yelp_Polls_Page::cardContent( $pollitems, 1 ).'</div>
-							<div class="card">'.Yelp_Polls_Page::cardContent( $pollitems, 2 ).'</div>
+							<div class="card card-1">'.Yelp_Polls_Page::cardContent( $pollitems, 0 ).'</div>
+							<div class="card card-2">'.Yelp_Polls_Page::cardContent( $pollitems, 1 ).'</div>
+							<div class="card card-3">'.Yelp_Polls_Page::cardContent( $pollitems, 2 ).'</div>
 						</div>
 					</section>
 				';
