@@ -71,10 +71,9 @@
 					foreach( $item['categories'] as $tag ) {
 						$tags[] = $tag['title'];
 					}
+					$price = "$";
 					if( isset($item['price'] ) ) {
 						$price = $item['price'];
-					} else {
-						$price = "$";
 					}
 					$businessLocation = $item['location']['display_address'];
 					$phone_link = $item['phone'];
