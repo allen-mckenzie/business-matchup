@@ -36,10 +36,16 @@ This development release is not yet fully documented.
 
 ## Changelog ##
 
-### 0.0.1 ###
+### 0.0.3 ###
 
-This is the initial shell for the plugin. It creates the custom post type and metaboxes that will be used by the API integrations later.
+Added initial configuration hooks for Yelp API and StrawPoll API integration.
+Fixed custom post type slug to be yelp-poll and yelp-polls respectively.
+Bug: relocating settings section into the post type management section soon.
 
 ### 0.0.2 ###
 
 Code audit to properly escape and filter outputs using best practices ( Issues flagged by Codacy )
+
+### 0.0.1 ###
+
+This is the initial shell for the plugin. It creates the custom post type and metaboxes that will be used by the API integrations later.
