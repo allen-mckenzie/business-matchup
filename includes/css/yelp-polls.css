@@ -8,13 +8,13 @@ header.entry-header {
   width: 100%;
   max-width: 1200px;
 }
-.cards {
+/* .cards {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-gap: 1rem;
-}
+} */
 .card {
   background-color: dodgerblue;
   color: white;
@@ -25,12 +25,12 @@ img.yelp-image {
   width: 100%;
   height: 11rem;
 }
-img.yelp-logo {
+/* img.yelp-logo {
   position: absolute;
   margin: 0 0 0 220px;
   bottom: -500px;
   height: 35px;
-}
+} */
 span {
   padding-left: 20px;
 }
@@ -58,14 +58,26 @@ iframe.strawpolls-content {
 @supports (grid-area: auto) {
   @media screen and (min-width: 600px) {
     #yelp-polls {
-      max-width: none;
+      max-width: 900px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       justify-content: center;
     }
+
+    #yelp-polls-title {
+      grid-row: 1;
+    }
+
+    .yelp-polls-content {
+      grid-row: 2;
+    }
+
+    .strawpolls-content {
+      grid-row: 3;
+    }    
   }
 
-  @media screen and (min-width: 900px) {
+  @media screen and (min-width: 1200px) {
     #yelp-polls {
       grid-template-columns: repeat(3, 1fr);
     }
