@@ -26,7 +26,7 @@
 				'headers' => array(
 					"Host" => "api.yelp.com",
 					"user-agent" => "",
-					"Authorization" => "$api_key",
+					"Authorization" => "Bearer $api_key",
 					"cache-control" => "no-cache"), 
 				);
 			$response = wp_remote_get( $api_url , $args );

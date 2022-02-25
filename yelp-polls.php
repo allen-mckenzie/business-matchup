@@ -3,7 +3,7 @@
 		* Plugin Name:       Yelp Polls
 		* Plugin URI:        https://github.com/allen-mckenzie/yelp-polls
 		* Description:       Create custom polls using Yelp and Straw Polls
-		* Version:           0.0.2
+		* Version:           0.0.3
 		* Requires at least: 5.5
 		* Requires PHP:      7.4
 		* Author:            Allen McKenzie
@@ -45,7 +45,7 @@
 			}
 
 			function yelp_polls_sidebar_layout( $layout ) {
-				$post_types = array( 'yelppolls' );
+				$post_types = array( 'yelp-polls' );
 			
 				if ( in_array( get_post_type(), $post_types ) ) {
 					return 'no-sidebar';
@@ -97,11 +97,11 @@
 					'supports'           => array( 'title', 'custom-fields', 'thumbnail' ),
 					'show_in_rest'       => true
 				);
-				register_post_type( 'Yelp Poll', $args );
+				register_post_type( 'yelp-polls', $args );
 			}
 		
 			public function add_meta_box( $post_type ) {
-				$post_types = array( 'yelppoll' );
+				$post_types = array( 'yelp-polls' );
 
 				if ( in_array( $post_type, $post_types ) ) {
 					add_meta_box(
@@ -137,7 +137,7 @@
 					return $post_id;
 				}
 
-				if ( 'page' == filter_input( INPUT_POST, 'yelppoll') ) {
+				if ( 'page' == filter_input( INPUT_POST, 'yelp-polls') ) {
 					if ( ! current_user_can( 'edit_page', $post_id ) ) {
 						return $post_id;
 					}
@@ -231,7 +231,7 @@
 				$response_body = wp_remote_retrieve_body( $response );
 				update_post_meta( $postID, '_yelp_polls_yelp_results', $response_body );
 				$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
-				var_dump($response_body);die();
+				// var_dump($response_body);die();
 				$pollitems = $yelpAPI->buildPollItems($response_body);
 				$location_array = explode(",",$location);
 				$city = $location_array[0];
@@ -266,7 +266,7 @@
 				$city = $location_array[0];
 				$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
 				$pollitems = $yelpAPI->buildPollItems($response_body);
-				if ($post->post_type == 'yelppoll') {
+				if ($post->post_type == 'yelp-polls') {
 					$content = '
 						<h1> '.$type.' locations near '.$city.'</h1>
 						<hr/>
@@ -284,15 +284,15 @@
 			}
 
 			function yp_menu() {
-				$mainPageHook = add_menu_page( 'Yelp Poll', 'Yelp Poll', 'manage_options', 'ypmenu', array( $this, 'ypForm' ), 'dashicons-admin-generic', 0 );
-				add_submenu_page( 'ypmenu', 'Words To Filter', 'Settings', 'manage_options', 'ypmenu', array( $this, 'ypForm' ) );
+				$mainPageHook = add_menu_page( 'Yelp Poll', 'Yelp Poll', 'manage_options', 'yelp-polls', array( $this, 'ypForm' ), 'dashicons-admin-generic', 0 );
+				add_submenu_page( 'yelp-polls', 'Yelp Poll Settings', 'Settings', 'manage_options', 'yelp-polls', array( $this, 'ypForm' ) );
 				add_action( 'admin_init', array( $this, 'settings' ) );
 			}
 	
 			function settings() {
-				add_settings_section( 'yelp_polls_replacements_section', null, null, 'ypmenu-options' );
-				register_setting( 'replacementFields', 'replacementText' );
-				add_settings_field( 'replacement-text', 'Filtered Text', array( $this, 'replaceHTML'), 'ypmenu-options', 'yelp_polls_replacements_section' );
+				add_settings_section( 'yelp_polls_settings_section', null, null, 'yelp-polls-options' );
+				register_setting( 'yelp_polls_Fields', 'yelp_polls_Text' );
+				add_settings_field( 'yelp_polls_text', 'Filtered Text', array( $this, 'yelp_fields'), 'yelp-polls-options', 'yelp_polls_settings_section' );
 			}
 
 			function handleForm() {
@@ -343,8 +343,8 @@
 						<h1>Yelp Polls Options</h1>
 						<form action="options.php" method="POST">
 							<?php
-								settings_fields( 'replacementFields' );
-								do_settings_sections( 'ypmenu-options' );
+								settings_fields( 'yelp_polls_Fields' );
+								do_settings_sections( 'yelp-polls-options' );
 								submit_button();
 							?>
 						</form>
