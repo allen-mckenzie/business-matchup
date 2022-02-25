@@ -295,23 +295,23 @@
 			}
 
 			function handleForm() {
+				$message = '
+				<div class="error">
+					<p>
+						Uh uh uh, you didn\'t say the magic word
+					</p>
+				</div>
+				';
 				if ( wp_verify_nonce( filter_input( INPUT_POST, 'nonce'), 'yelp_polls' ) AND current_user_can( 'manage_options' ) ) {
 					update_option( 'yelp_polls_yelp_api', sanitize_text_field( filter_input( INPUT_POST, 'yelp_api_key') ) );
 					update_option( 'yelp_polls_straw_poll_api', sanitize_text_field( filter_input( INPUT_POST, 'straw_poll_api_key') ) );
-					?>
+					$message = '
 						<div class="updated">
-							<p>Your API Key's were saved.</p>
+							<p>Your API Key\'s were saved.</p>
 						</div>
-					<?php
-				} else {
-					?>
-						<div class="error">
-							<p>
-								Uh uh uh, you didn't say the magic word
-							</p>
-						</div>
-					<?php
+					';
 				}
+				echo $message;
 			}
 	
 			function ypForm() {
@@ -328,11 +328,11 @@
 							<?php wp_nonce_field( 'yelp_polls', 'nonce' ); ?>
 							<label for="yelp_api_key"><p>Enter your Yelp API Key</p>
 							<div class="yelp_polls__flex-container">    
-								<input name="yelp_api_key" id="yelp_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php print esc_textarea( get_option( 'yelp_polls_yelp_api' ) ); ?>" />
+								<input name="yelp_api_key" id="yelp_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'yelp_polls_yelp_api' ) ) ); ?>" />
 							</div>
 							<label for="straw_poll_api_key"><p>Enter your Straw Poll API Key</p>
 							<div class="yelp_polls__flex-container">
-								<input name="straw_poll_api_key" id="straw_poll_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php print esc_textarea( get_option( 'yelp_polls_straw_poll_api' ) ); ?>" />
+								<input name="straw_poll_api_key" id="straw_poll_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'yelp_polls_straw_poll_api' ) ) ); ?>" />
 							</div>
 							<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 						</form>
