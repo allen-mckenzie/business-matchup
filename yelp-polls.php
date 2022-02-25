@@ -146,7 +146,7 @@
 					}
 				}
 
-				$yelp_polls_business_location = sanitize_text_field( filter_input( INPUT_POST, 'yelp-polls-business-location') );
+				$ypBizLoc = sanitize_text_field( filter_input( INPUT_POST, 'yelp-polls-business-location') );
 				$yelp_polls_type = sanitize_text_field( filter_input( INPUT_POST, 'yelp-polls-type') );
 				$postID = sanitize_text_field( filter_input( INPUT_POST, 'post_ID') );
 				$has_poll = get_post_meta( $postID, '_yelp_polls_poll', true );
@@ -154,10 +154,10 @@
 					return;
 				}
 				if( $has_poll === '' ) {
-					$yelp_polls_poll = $this->addPoll( $postID, $yelp_polls_type, $yelp_polls_business_location );
+					$yelp_polls_poll = $this->addPoll( $postID, $yelp_polls_type, $ypBizLoc );
 					update_post_meta( $post_id, '_yelp_polls_poll', $yelp_polls_poll );
 				}
-				update_post_meta( $post_id, '_yelp_polls_business_location', $yelp_polls_business_location );
+				update_post_meta( $post_id, '_yelp_polls_business_location', $ypBizLoc );
 				update_post_meta( $post_id, '_yelp_polls_type', $yelp_polls_type );
 			}
 
@@ -165,21 +165,21 @@
 
 				wp_nonce_field( 'yelp_polls_metabox', 'yelp_polls_metabox_nonce' );
 
-				$businessLocation = get_post_meta( $post->ID, '_yelp_polls_business_location', true );
+				$bizLoc = get_post_meta( $post->ID, '_yelp_polls_business_location', true );
 
 				?>
 				<label for="yelp-polls-business-location">
 					<?php esc_html_e( 'City, State Abbreviate. Example: San Francisco, CA', 'yelp-polls' ); ?>
 				</label>
 					
-				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-business-location" value="<?php esc_html_e( $businessLocation, 'yelp-polls' ); ?>" /> 
+				<input style="width:100%;" type="text" class="form-control" name="yelp-polls-business-location" value="<?php esc_html_e( $bizLoc, 'yelp-polls' ); ?>" /> 
 				<?php
 			}
 
 			public function render_meta_box_type_content( $post ) {
 
 				$type = get_post_meta( $post->ID, '_yelp_polls_type', true );
-				$businessLocation = get_post_meta( $post->ID, '_yelp_polls_business_location', true );
+				$bizLoc = get_post_meta( $post->ID, '_yelp_polls_business_location', true );
 
 				?>
 				<label for="yelp-polls-type">
@@ -222,9 +222,9 @@
 				return $html;
 			}
 
-			function addPoll( $postID, $term, $businessLocation ) {
+			function addPoll( $postID, $term, $bizLoc ) {
 				$yelpAPI = new Yelp_API();
-				$response = $yelpAPI->search( $term, $businessLocation );
+				$response = $yelpAPI->search( $term, $bizLoc );
 				if( null === $response) {
 					return;
 				}
@@ -232,8 +232,8 @@
 				update_post_meta( $postID, '_yelp_polls_yelp_results', $response_body );
 				$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
 				$pollitems = $yelpAPI->buildPollItems($response_body);
-				$businessLocation_array = explode(",",$businessLocation);
-				$city = $businessLocation_array[0];
+				$bizLoc_array = explode(",",$bizLoc);
+				$city = $bizLoc_array[0];
 				$answers = array();
 				foreach($pollitems as $answer) {
 					$answers[] = $answer['name'];
@@ -259,10 +259,10 @@
 				global $post;
 				$postID = $post->ID;
 				$type = get_post_meta( $postID, '_yelp_polls_type', true );
-				$businessLocation = get_post_meta( $postID, '_yelp_polls_business_location', true );
+				$bizLoc = get_post_meta( $postID, '_yelp_polls_business_location', true );
 				$poll = get_post_meta( $postID, '_yelp_polls_poll', true );
-				$businessLocation_array = explode(",",$businessLocation);
-				$city = $businessLocation_array[0];
+				$bizLoc_array = explode(",",$bizLoc);
+				$city = $bizLoc_array[0];
 				$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
 				$pollitems = $yelpAPI->buildPollItems($response_body);
 				if ($post->post_type == 'yelp-polls') {
