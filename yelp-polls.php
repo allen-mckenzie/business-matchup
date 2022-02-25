@@ -206,7 +206,6 @@
 				);
 				$args = array(
 					'method' => 'POST',
-					'timeout' => 0,
 					'headers' => $headers,
 					'blocking'    => true,
 					'body' => $post_data,
