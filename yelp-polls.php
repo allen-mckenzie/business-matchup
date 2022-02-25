@@ -239,7 +239,7 @@
 		}
 
 		public function yelp_polls_content($content) {
-			//$yelpAPI = new Yelp_API();
+			$yelp_polls_page = new Yelp_Polls_Page();
 			global $post;
 			$postID = $post->ID;
 			$type = get_post_meta( $postID, '_yelp_polls_type', true );
@@ -248,7 +248,7 @@
 			$bizLoc_array = explode(",",$bizLoc);
 			$city = $bizLoc_array[0];
 			$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
-			$pollitems = Yelp_Polls_Page::buildPollItems($response_body);
+			$pollitems = $yelp_polls_page->buildPollItems($response_body);
 			$content = '<section id="yelp-polls">';
 			if ($post->post_type == 'yelp-polls') {
 				$content .= '
@@ -256,9 +256,9 @@
 					<hr/>
 					<section class="yelp-polls-content">
 						<div class="cards">
-							<div class="card card-1">'.Yelp_Polls_Page::cardContent( $pollitems, 0 ).'</div>
-							<div class="card card-2">'.Yelp_Polls_Page::cardContent( $pollitems, 1 ).'</div>
-							<div class="card card-3">'.Yelp_Polls_Page::cardContent( $pollitems, 2 ).'</div>
+							<div class="card card-1">'.$yelp_polls_page->cardContent( $pollitems, 0 ).'</div>
+							<div class="card card-2">'.$yelp_polls_page->cardContent( $pollitems, 1 ).'</div>
+							<div class="card card-3">'.$yelp_polls_page->cardContent( $pollitems, 2 ).'</div>
 						</div>
 					</section>
 				';
