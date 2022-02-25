@@ -390,7 +390,7 @@
 						<h1> '.$type.' locations near '.$city.'</h1>
 						<hr/>
 					</div>
-					<section class="yelp-polls-content">
+					<section id="yelp-polls-content">
 						<div class="cards">
 							<div class="card card-1">'.$yelp_polls_page->cardContent( $pollitems, 0 ).'</div>
 							<div class="card card-2">'.$yelp_polls_page->cardContent( $pollitems, 1 ).'</div>
@@ -398,7 +398,9 @@
 						</div>
 					</section>
 				';
+				$content .= '<div id="strawpolls-content">';
 				$content .= $poll;
+				$content .= '</div>';
 				$content .= '</section>';
 			}
 			return $content;
