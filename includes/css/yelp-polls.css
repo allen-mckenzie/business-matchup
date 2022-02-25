@@ -38,3 +38,16 @@ p.yelp-phone a,
 p.yelp-location a {
   color: #fff;
 }
+
+/** Strawpoll Content **/
+iframe# {
+  width: 75%;
+  height: 100%;
+  margin: 0 16.5% !important;
+  padding-top: 20px;
+  min-height: 640px;
+}
+
+/** Basic responsive layout for all browsers **/
+
+/** CSS Grid layout for modern browsers **/
