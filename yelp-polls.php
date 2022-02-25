@@ -40,8 +40,8 @@
 				add_action( 'wp_enqueue_scripts', array( $this, 'yelp_polls_styles' ) );
 			}
 
-			public function activate() {
-				flush_rewrite_rules();
+			function activate() {
+				update_option('plugin_permalinks_flushed', 0);
 			}
 
 			function yelp_polls_styles() {
@@ -104,7 +104,7 @@
 				register_post_type( 'yelp-polls', $args );
 			}
 		
-			public function add_meta_box( $post_type ) {
+			function add_meta_box( $post_type ) {
 				$post_types = array( 'yelp-polls' );
 
 				if ( in_array( $post_type, $post_types ) ) {
@@ -131,7 +131,7 @@
 
 			}
 
-			public function save( $post_id ) {
+			function save( $post_id ) {
 
 				if ( ! wp_verify_nonce( filter_input( INPUT_POST, 'yelp_polls_metabox_nonce'), 'yelp_polls_metabox' ) ) {
 					return $post_id;
@@ -162,7 +162,7 @@
 				update_post_meta( $post_id, '_yelp_polls_type', $yelp_polls_type );
 			}
 
-			public function render_meta_box_location_content( $post ) {
+			function render_meta_box_location_content( $post ) {
 
 				wp_nonce_field( 'yelp_polls_metabox', 'yelp_polls_metabox_nonce' );
 
@@ -177,7 +177,7 @@
 				<?php
 			}
 
-			public function render_meta_box_type_content( $post ) {
+			function render_meta_box_type_content( $post ) {
 
 				$type = get_post_meta( $post->ID, '_yelp_polls_type', true );
 				// $bizLoc = get_post_meta( $post->ID, '_yelp_polls_business_location', true );
@@ -196,7 +196,7 @@
 				<?php
 			}
 
-			public function createPoll( $poll_json ) {
+			function createPoll( $poll_json ) {
 				$url = 'https://strawpoll.com/api/poll';
 				$post_data = $poll_json;
 				$headers = array(
@@ -265,8 +265,9 @@
 				$city = $bizLoc_array[0];
 				$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
 				$pollitems = $yelpAPI->buildPollItems($response_body);
+				$content = '<section id="yelp-polls">';
 				if ($post->post_type == 'yelp-polls') {
-					$content = '
+					$content .= '
 						<h1> '.$type.' locations near '.$city.'</h1>
 						<hr/>
 						<section class="yelp-polls-content">
@@ -278,6 +279,7 @@
 						</section>
 					';
 					$content .= $poll;
+					$content .= '</section>';
 				}
 				return $content;
 			}
@@ -294,23 +296,30 @@
 				add_settings_field( 'yelp_polls_text', 'Filtered Text', array( $this, 'yelp_fields'), 'yelp-polls-options', 'yelp_polls_settings_section' );
 			}
 
+			function handleForm_admin_notice__success() {
+				?>
+				<div class="notice notice-success is-dismissible">
+					<p><?php esc_html_e( 'Your API Key\'s were saved.', 'yelp-polls' ); ?></p>
+				</div>
+				<?php
+			}
+			
+			function handleForm_admin_notice__error() {
+				?>
+				<div class="notice notice-error">
+					<p><?php esc_html_e( 'Uh uh uh... you didn\t say the magic word...', 'yelp-polls' ); ?></p>
+				</div>
+				<?php
+			}
+
 			function handleForm() {
 				if ( wp_verify_nonce( filter_input( INPUT_POST, 'nonce'), 'yelp_polls' ) AND current_user_can( 'manage_options' ) ) {
 					update_option( 'yelp_polls_yelp_api', sanitize_text_field( filter_input( INPUT_POST, 'yelp_api_key') ) );
 					update_option( 'yelp_polls_straw_poll_api', sanitize_text_field( filter_input( INPUT_POST, 'straw_poll_api_key') ) );
-					?>
-						<div class="updated">
-							<p>Your API Key's were saved.</p>
-						</div>
-					<?php
-				} else {
-					?>
-						<div class="error">
-							<p>
-								Uh uh uh, you didn't say the magic word
-							</p>
-						</div>
-					<?php
+					add_action( 'admin_notices', 'handleForm_admin_notice__success' );
+				}
+				if ( !wp_verify_nonce( filter_input( INPUT_POST, 'nonce'), 'yelp_polls' ) AND !current_user_can( 'manage_options' ) ) {
+					add_action( 'admin_notices', 'handleForm_admin_notice__error' );
 				}
 			}
 	
@@ -328,11 +337,11 @@
 							<?php wp_nonce_field( 'yelp_polls', 'nonce' ); ?>
 							<label for="yelp_api_key"><p>Enter your Yelp API Key</p>
 							<div class="yelp_polls__flex-container">    
-								<input name="yelp_api_key" id="yelp_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php print esc_textarea( get_option( 'yelp_polls_yelp_api' ) ); ?>" />
+								<input name="yelp_api_key" id="yelp_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'yelp_polls_yelp_api' ) ) ); ?>" />
 							</div>
 							<label for="straw_poll_api_key"><p>Enter your Straw Poll API Key</p>
 							<div class="yelp_polls__flex-container">
-								<input name="straw_poll_api_key" id="straw_poll_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php print esc_textarea( get_option( 'yelp_polls_straw_poll_api' ) ); ?>" />
+								<input name="straw_poll_api_key" id="straw_poll_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'yelp_polls_straw_poll_api' ) ) ); ?>" />
 							</div>
 							<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 						</form>
