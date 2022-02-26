@@ -84,7 +84,7 @@
 		 */
 		public static function include_file( $filename ) {
 			$file = self::dir( $filename . '.php' );
-			if ( ! file_exists( $file ) ) {	// This check is necessary to find our php files containing our class definitions.
+			if ( ! is_file( $file ) ) {	// This check is necessary to find our php files containing our class definitions.
 				return false;
 			}
 			include_once $file; // This issue continues to elude me. How do we includ or require a file without using one of these commands?
