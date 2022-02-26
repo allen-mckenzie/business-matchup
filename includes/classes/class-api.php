@@ -162,6 +162,7 @@
 		 */
 		public function addPoll( $postID, $term, $bizLoc ) {
 			$yelpAPI = new Yelp_API();
+			$yelpPollsPage = new Yelp_Polls_Page();
 			$response = $yelpAPI->search( $term, $bizLoc );
 			if( null === $response) {
 				return;
@@ -169,7 +170,7 @@
 			$response_body = wp_remote_retrieve_body( $response );
 			update_post_meta( $postID, '_yelp_polls_yelp_results', $response_body );
 			$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
-			$pollitems = Yelp_Polls_Page::buildPollItems($response_body);
+			$pollitems = $yelpPollsPage->buildPollItems($response_body);
 			$bizLoc_array = explode(",",$bizLoc);
 			$city = $bizLoc_array[0];
 			$answers = array();
