@@ -27,7 +27,7 @@
 			$bizLoc_array = explode(",",$bizLoc);
 			$city = $bizLoc_array[0];
 			$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
-			$pollitems = Yelp_Polls_Page::buildPollItems($response_body);
+			$pollitems = $this->buildPollItems($response_body);
 			$content = '<section id="yelp-polls">';
 			if ($post->post_type == 'yelp-polls') {
 				$content .= '
@@ -35,9 +35,9 @@
 					<hr/>
 					<section class="yelp-polls-content">
 						<div class="cards">
-							<div class="card card-1">'.Yelp_Polls_Page::cardContent( $pollitems, 0 ).'</div>
-							<div class="card card-2">'.Yelp_Polls_Page::cardContent( $pollitems, 1 ).'</div>
-							<div class="card card-3">'.Yelp_Polls_Page::cardContent( $pollitems, 2 ).'</div>
+							<div class="card card-1">'.$this->cardContent( $pollitems, 0 ).'</div>
+							<div class="card card-2">'.$this->cardContent( $pollitems, 1 ).'</div>
+							<div class="card card-3">'.$this->cardContent( $pollitems, 2 ).'</div>
 						</div>
 					</section>
 				';
