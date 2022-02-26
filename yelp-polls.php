@@ -30,6 +30,7 @@
 	 * @param type $class_name string containing file name.
 	 */
 	function yelp_polls_autoload_classes( $class_name ) {
+		$yelpPolls = new Yelp_Polls();
 		if ( 0 !== strpos( $class_name, 'Yelp_' ) ) {
 			return;
 		}
@@ -41,7 +42,7 @@
 				substr( $class_name, strlen( 'Yelp_' ) )
 			)
 		);
-		Yelp_Polls::include_file( 'includes/classes/class-' . $filename );
+		$yelpPolls->include_file( 'includes/classes/class-' . $filename );
 	}
 
 	/**
@@ -83,10 +84,10 @@
 		 */
 		public static function include_file( $filename ) {
 			$file = self::dir( $filename . '.php' );
-			if ( ! file_exists( $file ) ) {
+			if ( ! file_exists( $file ) ) {	// This check is necessary to find our php files containing our class definitions.
 				return false;
 			}
-			include_once $file;
+			include_once $file; // This issue continues to elude me. How do we includ or require a file without using one of these commands?
 			return true;
 		}
 
@@ -280,7 +281,7 @@
 		 * @return integer $post_id if performing verification fails or if performing an autosave
 		 */
 		public function save( $post_id ) {
-
+			$yelpAPI = new Yelp_API();
 			if ( ! wp_verify_nonce( filter_input( INPUT_POST, 'yelp_polls_metabox_nonce'), 'yelp_polls_metabox' ) ) {
 				return $post_id;
 			}
@@ -303,7 +304,7 @@
 				return;
 			}
 			if( $has_poll === '' ) {
-				$yelp_polls_poll = Yelp_API::addPoll( $postID, $yelp_polls_type, $ypBizLoc );
+				$yelp_polls_poll = $yelpAPI->addPoll( $postID, $yelp_polls_type, $ypBizLoc );
 				update_post_meta( $post_id, '_yelp_polls_poll', $yelp_polls_poll );
 			}
 			update_post_meta( $post_id, '_yelp_polls_business_location', $ypBizLoc );
@@ -541,7 +542,7 @@
 	 * @return class Yelp_Polls instance
 	 */
 	function yelpPolls() {
-		//$yelpPolls = new Yelp_Polls;
-		return Yelp_Polls::get_instance();
+		$yelpPolls = new Yelp_Polls();
+		return $yelpPolls->get_instance();
 	}
 	add_action( 'plugins_loaded', array( yelpPolls(), 'hooks' ) );
