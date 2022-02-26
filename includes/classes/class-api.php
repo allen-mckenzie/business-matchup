@@ -3,7 +3,7 @@
 	/**
 	 * Configuration Details and Defining Our Global Constants
 	 * 
-	 * @since 0.0.2
+	 * @since 0.1.0
 	 * 
 	 * @param string $yelpAPI contains the Yelp API Key.
 	 * @param string $strawAPI contains the StrawPoll API Key.
@@ -31,7 +31,7 @@
 	 * Yelp_API class
 	 * This class defines the actions taken to access the API's
 	 * 
-	 * @since 0.0.3
+	 * @since 0.1.0
 	 */
 	class Yelp_API {
 
@@ -39,7 +39,7 @@
 		 * doAPI function
 		 * This function defines the request to perform the Yelp API calls.
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 * 
 		 * @param string $api_url contains the base url of the api to call.
 		 * @param string $path contains the endpoint fo the api to call.
@@ -69,7 +69,7 @@
 		 * search function
 		 * This function creates the paramaters needed to submit a search to the Yelp API.
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 * 
 		 * @param string $term contains the type of business we want to look for.
 		 * @param string $businessLocation contains the City and State-Abbreviation where we want to look for those businesses.
@@ -88,7 +88,7 @@
 		 * get_business function
 		 * This function fetches the business details for a given business from the Yelp API.
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 * 
 		 * @param integer $business_id is the ID number of the business in Yelp.
 		 * @return array response output from the Yelp_API for the given call.
@@ -102,7 +102,7 @@
 		 * query_api function
 		 * This function compiles a formatted JSON object from output of our Yelp Searches.
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 * 
 		 * @param string $term contain the type of business.
 		 * @param string $businessLocation contains the location of the business.
@@ -118,7 +118,7 @@
 		 * createPoll function
 		 * This function creates a new Poll on StrawPoll using the StrawPoll API using the information provided in $poll_json.
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 * 
 		 * @param string $poll_json JSON object containing the details of the businesses we are creating a poll for.
 		 * @return string $html contains the formatted iFrame that will be used in the content of our custom post type.
@@ -153,7 +153,7 @@
 		 * addPoll function
 		 * This function creates the headings and formatting where our new poll will be displayed.
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 * 
 		 * @param integer $postID is the id number of the post.
 		 * @param string $term is the type of business we are showing the poll about.
@@ -162,6 +162,7 @@
 		 */
 		public function addPoll( $postID, $term, $bizLoc ) {
 			$yelpAPI = new Yelp_API();
+			$yelpPollsPage = new Yelp_Polls_Page();
 			$response = $yelpAPI->search( $term, $bizLoc );
 			if( null === $response) {
 				return;
@@ -169,7 +170,7 @@
 			$response_body = wp_remote_retrieve_body( $response );
 			update_post_meta( $postID, '_yelp_polls_yelp_results', $response_body );
 			$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
-			$pollitems = Yelp_Polls_Page::buildPollItems($response_body);
+			$pollitems = $yelpPollsPage->buildPollItems($response_body);
 			$bizLoc_array = explode(",",$bizLoc);
 			$city = $bizLoc_array[0];
 			$answers = array();

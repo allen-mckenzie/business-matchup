@@ -4,7 +4,7 @@
 	 * Yelp_Polls_Page class
 	 * This class contains the functions needed to create and display the content for our custom post type.
 	 * 
-	 * @since 0.0.3
+	 * @since 0.1.0
 	 */
     class Yelp_Polls_Page {
 
@@ -13,7 +13,7 @@
 		 * This function displays the gathered information from the Yelp API and Straw Poll API based on the 
 		 * information provided in the custom metaboxes for the content of the Custom Post Type Front End.
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 * 
 		 * @param array $content is the array containing the page content for the given post.
 		 * @return array $content for the custom post type after generating it from the data we retrieved.
@@ -27,7 +27,7 @@
 			$bizLoc_array = explode(",",$bizLoc);
 			$city = $bizLoc_array[0];
 			$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
-			$pollitems = Yelp_Polls_Page::buildPollItems($response_body);
+			$pollitems = $this->buildPollItems($response_body);
 			$content = '<section id="yelp-polls">';
 			if ($post->post_type == 'yelp-polls') {
 				$content .= '
@@ -35,9 +35,9 @@
 					<hr/>
 					<section class="yelp-polls-content">
 						<div class="cards">
-							<div class="card card-1">'.Yelp_Polls_Page::cardContent( $pollitems, 0 ).'</div>
-							<div class="card card-2">'.Yelp_Polls_Page::cardContent( $pollitems, 1 ).'</div>
-							<div class="card card-3">'.Yelp_Polls_Page::cardContent( $pollitems, 2 ).'</div>
+							<div class="card card-1">'.$this->cardContent( $pollitems, 0 ).'</div>
+							<div class="card card-2">'.$this->cardContent( $pollitems, 1 ).'</div>
+							<div class="card card-3">'.$this->cardContent( $pollitems, 2 ).'</div>
 						</div>
 					</section>
 				';
@@ -51,7 +51,7 @@
 		 * buildPollItems function
 		 * This function creates an array of poll items to pass on to the create cards function.
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 * 
 		 * @param array $results contains the array of information retrieved from the Yelp API
 		 * @return array $pollitems with a new array with the information we need when creating the cards.
@@ -108,7 +108,7 @@
 		 * cardContent function
 		 * This function creates the display markup for each of the 3 cards we will be displaying.
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 * 
 		 * @param array $pollitems contains an array of items built by buildPollItems.
 		 * @param integer $index contains the current index of the card being created.

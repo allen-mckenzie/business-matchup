@@ -3,9 +3,9 @@
 		* Plugin Name:       Yelp Polls
 		* Plugin URI:        https://github.com/allen-mckenzie/yelp-polls
 		* Description:       Create custom polls using Yelp and Straw Polls
-		* Version:           0.0.4
+		* Version:           0.1.0
 		* Requires at least: 5.5
-		* Requires PHP:      7.4
+		* Requires PHP:      7.0
 		* Author:            Allen McKenzie
 		* Contributers:		 allenmcnichols, amethystanswers
 		* Author URI:        https://github.com/allen-mckenzie
@@ -25,11 +25,12 @@
 	 * Include our classes
 	 * All Yelp Polls classes are prefixed with `Yelp_`
 	 * 
-	 * @since 0.0.3
+	 * @since 0.1.0
 	 * 
 	 * @param type $class_name string containing file name.
 	 */
 	function yelp_polls_autoload_classes( $class_name ) {
+		$yelpPolls = new Yelp_Polls();
 		if ( 0 !== strpos( $class_name, 'Yelp_' ) ) {
 			return;
 		}
@@ -41,21 +42,21 @@
 				substr( $class_name, strlen( 'Yelp_' ) )
 			)
 		);
-		Yelp_Polls::include_file( 'includes/classes/class-' . $filename );
+		$yelpPolls->include_file( 'includes/classes/class-' . $filename );
 	}
 
 	/**
 	 * spl_autoload_register
 	 * Registers all of the classes found by the autoloader
 	 * 
-	 * @since 0.0.3
+	 * @since 0.1.0
 	 */
 	spl_autoload_register( 'yelp_polls_autoload_classes' );
 
 	/**
 	 * Define the Yelp Polls Plugin Dir
 	 * 
-	 * @since 0.0.2
+	 * @since 0.1.0
 	 */
 	define( 'YELP_POLLS__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
@@ -63,7 +64,7 @@
 	 * Yelp_Polls Class definition
 	 * This is the main class for the plugin
 	 * 
-	 * @since 0.0.3
+	 * @since 0.1.0
 	 */
 	final class Yelp_Polls {
 
@@ -76,17 +77,17 @@
 		 * include_file function
 		 * Check our directory for any files ending with .php
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 * 
 		 * @param type $filename string containing the name of the file
 		 * @return boolean True/False if file was found
 		 */
 		public static function include_file( $filename ) {
 			$file = self::dir( $filename . '.php' );
-			if ( ! file_exists( $file ) ) {
+			if ( ! file_exists( $file ) ) {	// This check is necessary to find our php files containing our class definitions.
 				return false;
 			}
-			include_once $file;
+			include_once $file; // This issue continues to elude me. How do we includ or require a file without using one of these commands?
 			return true;
 		}
 
@@ -94,7 +95,7 @@
 		 * dir function
 		 * Create paths with trailing slashes based on the provide path
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 * 
 		 * @param type $path string with the name of the path
 		 * @return string $dir . $path formatted directory path
@@ -109,7 +110,7 @@
 		 * hooks function
 		 * Plugin intialization action, filters, and hooks go here
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 */
 		public function hooks() {
 			add_action( 'admin_menu', array( $this, 'yp_menu' ) );
@@ -131,7 +132,7 @@
 		 * to force WordPress to refresh the permalinks in preparation of creating
 		 * our custom post type.
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 */
 		public function activate() {
 			update_option('plugin_permalinks_flushed', 0);
@@ -141,7 +142,7 @@
 		 * get_instance function
 		 * This helps set up the single instance of our new class
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 * 
 		 * @return self::$single_instance of the class
 		 */
@@ -157,7 +158,7 @@
 		 * yelp_polls_styles function
 		 * This function enqueues our custom styles.
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 */
 		public function yelp_polls_styles() {
 			wp_enqueue_style( 'yelp-polls-style', plugin_dir_url(__FILE__).'includes/css/yelp-polls.css' );
@@ -167,7 +168,7 @@
 		 * yelp_polls_sidebar_layout function
 		 * This function disables the sidebar if present on our custom post type pages.
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 * 
 		 * @param array $layout contains the global layout configuration for the site
 		 * @return arry $layout with the sidebar disabled
@@ -186,7 +187,7 @@
 		 * yelp_polls_cpt function
 		 * This function sets up and creates the custom post type for the Yelp Polls.
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 */
 		public function yelp_polls_cpt() {
 			$labels = array(
@@ -238,7 +239,7 @@
 		 * add_meta_box function
 		 * Creates custom metaboxes for our custom post type so we can allow users to enter the location and type of business
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 * 
 		 * @param string $post_type string the contains the post type
 		 */
@@ -274,13 +275,13 @@
 		 * This function takes the submitted form information from the custom post type editor screen
 		 * and verifies the entered data before saving them as postmeta entries in the database for the current post.
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 * 
 		 * @param integer $post_id contains the id number of the current post
 		 * @return integer $post_id if performing verification fails or if performing an autosave
 		 */
 		public function save( $post_id ) {
-
+			$yelpAPI = new Yelp_API();
 			if ( ! wp_verify_nonce( filter_input( INPUT_POST, 'yelp_polls_metabox_nonce'), 'yelp_polls_metabox' ) ) {
 				return $post_id;
 			}
@@ -303,7 +304,7 @@
 				return;
 			}
 			if( $has_poll === '' ) {
-				$yelp_polls_poll = Yelp_API::addPoll( $postID, $yelp_polls_type, $ypBizLoc );
+				$yelp_polls_poll = $yelpAPI->addPoll( $postID, $yelp_polls_type, $ypBizLoc );
 				update_post_meta( $post_id, '_yelp_polls_poll', $yelp_polls_poll );
 			}
 			update_post_meta( $post_id, '_yelp_polls_business_location', $ypBizLoc );
@@ -315,7 +316,7 @@
 		 * This function displays the custom metabox within the editor screen of the current post
 		 * to allow the user to provide a location in a City, ST format.
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 * 
 		 * @param array $post is the current array item containing the data for the current post.
 		 */
@@ -339,7 +340,7 @@
 		 * This function displays the custom metabox within the editor screen of the current post
 		 * to allow the user to provide a type of business. ie: Diner, Entertainment, etc...
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 * 
 		 * @param array $post is the current array item containing the data for the current post
 		 */
@@ -367,7 +368,7 @@
 		 * This function displays the gathered information from the Yelp API and Straw Poll API based on the 
 		 * information provided in the custom metaboxes for the content of the Custom Post Type Front End.
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 * 
 		 * @param array $content is the array containing the page content for the given post.
 		 * @return array $content for the custom post type after generating it from the data we retrieved.
@@ -410,7 +411,7 @@
 		 * yp_menu function
 		 * This function creates a new admin menu item to allow users to enter their Yelp and StrawPoll API keys.
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 */
 		public function yp_menu() {
 			add_menu_page( 'Yelp Poll', 'Yelp Poll', 'manage_options', 'yelp-polls', array( $this, 'ypForm' ), 'dashicons-admin-generic', 0 );
@@ -422,7 +423,7 @@
 		 * settings function
 		 * This function creates custom setting fields that our new menu will use to store credentials.
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 */
 		public function settings() {
 			add_settings_section( 'yelp_polls_settings_section', null, null, 'yelp-polls-options' );
@@ -433,7 +434,7 @@
 		 * handleForm_admin_notice__success function
 		 * This function handles the output and display of custom admin notices upon submitting the credentials in the settings menu.
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 */
 		public function handleForm_admin_notice__success() {
 			?>
@@ -448,7 +449,7 @@
 		 * This function handles the output and display of custom admin notices upon submitting the credentials in the settings menu
 		 * without passing a valid nonce.
 		 * 
-		 * @since 0.0.3
+		 * @since 0.1.0
 		 */
 		public function handleForm_admin_notice__error() {
 			?>
@@ -462,7 +463,7 @@
 		 * handleForm function
 		 * This function processes and validates the information submitted in our new settings menu
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 */
 		public function handleForm() {
 			if ( wp_verify_nonce( filter_input( INPUT_POST, 'nonce'), 'yelp_polls' ) AND current_user_can( 'manage_options' ) ) {
@@ -480,7 +481,7 @@
 		 * This function generates the form used in the settings menu to allow users to submit the credentials. That input is then
 		 * passed to the handleForm function and stored into the options table to be used while making API calls to Yelp and StrawPoll.
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 */
 		public function ypForm() {
 			?>
@@ -513,7 +514,7 @@
 		 * optionsSubPage function
 		 * This function help define our new settings page in our new custom menu item to help users easily find where to enter their credentials.
 		 * 
-		 * @since 0.0.2
+		 * @since 0.1.0
 		 */
 		public function optionsSubPage() {
 			?>
@@ -536,12 +537,12 @@
 	 * yelpPolls function
 	 * This function helps create and standup our class
 	 * 
-	 * @since 0.0.3
+	 * @since 0.1.0
 	 * 
 	 * @return class Yelp_Polls instance
 	 */
 	function yelpPolls() {
-		//$yelpPolls = new Yelp_Polls;
-		return Yelp_Polls::get_instance();
+		$yelpPolls = new Yelp_Polls();
+		return $yelpPolls->get_instance();
 	}
 	add_action( 'plugins_loaded', array( yelpPolls(), 'hooks' ) );

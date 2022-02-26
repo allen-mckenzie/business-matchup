@@ -1,6 +1,6 @@
 module.exports = function( grunt ) {
 
-	'use strict';
+	"use strict";
 
 	// Project configuration
 	grunt.initConfig( {
@@ -11,7 +11,7 @@ module.exports = function( grunt ) {
 			options: {
 				textdomain: "yelp-polls",
 			},
-			update_all_domains: {
+			updateAllDomains: {
 				options: {
 					updateDomains: true
 				},
@@ -19,8 +19,8 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		wp_readme_to_markdown: {
-			your_target: {
+		"wp_readme_to_markdown": {
+			yourTarget: {
 				files: {
 					"README.md": "readme.txt"
 				}
