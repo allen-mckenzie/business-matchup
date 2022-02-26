@@ -45,6 +45,10 @@ This is an upgrade notice
 
 Here is the Changelog
 
+=== 0.1.0 ===
+
+Code cleanup and prep for the first release and review
+
 === 0.0.3 ===
 
 Added initial configuration hooks for Yelp API and StrawPoll API integration.

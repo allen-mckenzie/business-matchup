@@ -24,11 +24,11 @@ Yelp Polls helps you generate content by allowing you to specify a specific loca
 
 Here are some frequently asked questions
 
-# Where do I enter my Yelp API Key #
+### Where do I enter my Yelp API Key ###
 
 The Yelp API integration has not been added yet. This is a development release.
 
-# What about my StrawPoll API Key #
+### What about my StrawPoll API Key ###
 
 The StrawPoll integration has not been added yet. This is a development release.
 
@@ -45,16 +45,20 @@ This is an upgrade notice
 
 Here is the Changelog
 
-# 0.0.3 #
+### 0.1.0 ###
+
+Code cleanup and prep for the first release and review
+
+### 0.0.3 ###
 
 Added initial configuration hooks for Yelp API and StrawPoll API integration.
 Fixed custom post type slug to be yelp-poll and yelp-polls respectively.
 Bug: relocating settings section into the post type management section soon.
 
-# 0.0.2 #
+### 0.0.2 ###
 
 Code audit to properly escape and filter outputs using best practices ( Issues flagged by Codacy )
 
-# 0.0.1 #
+### 0.0.1 ###
 
 This is the initial shell for the plugin. It creates the custom post type and metaboxes that will be used by the API integrations later.
