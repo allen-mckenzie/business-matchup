@@ -85,7 +85,6 @@ iframe.strawpolls-content {
 
 /** CSS Grid layout for modern browsers **/
 @supports (grid-area: auto) {
-
   @media screen and (min-width: 600px) {
     #yelp-polls {
       max-width: 900px;
@@ -142,7 +141,5 @@ iframe.strawpolls-content {
     .cards {
       grid-template-columns: repeat(3, 1fr);
     }
-
   }
-
 }
