@@ -1,4 +1,4 @@
-= Yelp Polls =
+= WP Yelp Polls =
 Contributors: allenmcnichols, AmethystAnswers
 Donate link: https://github.com/sponsors/allen-mckenzie  
 Tags: Yelp, Polls, Community Engagement  
@@ -13,7 +13,7 @@ This plugin will access the Yelp API and StrawPoll API to create polls based on 
 
 == Description ==
 
-Yelp Polls helps you generate content by allowing you to specify a specific location and business category to pull information about the top 3 rated businesses in a given city. It then uses this information to create a StrawPoll and generates the necessary content to create a custom post that you can then share on Social Media.
+WP Yelp Polls helps you generate content by allowing you to specify a specific location and business category to pull information about the top 3 rated businesses in a given city. It then uses this information to create a StrawPoll and generates the necessary content to create a custom post that you can then share on Social Media.
 
 == Installation ==
 
