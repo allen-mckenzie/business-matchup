@@ -1,6 +1,6 @@
 <?php
 	/**
-		* Plugin Name:       Yelp Polls
+		* Plugin Name:       WP Yelp Polls
 		* Plugin URI:        https://github.com/allen-mckenzie/yelp-polls
 		* Description:       Create custom polls using Yelp and Straw Polls
 		* Version:           0.1.0
