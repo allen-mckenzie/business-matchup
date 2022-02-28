@@ -59,6 +59,9 @@
 		function buildPollItems( $results ) {
 			$pollitems = array();
 			$count = 1;
+			if( !is_array( $results ) || !isset( $results['businesses'][0]['name'] ) ) {
+				return;
+			}
 			foreach( $results as $result ) {
 				foreach( $result as $item ) {
 					$name = $item['name'];
@@ -115,6 +118,9 @@
 		 * @return string $html contains the generated markup to be displayed for the current card item in the index.
 		 */
 		function cardContent( $pollitems, $index ) {
+			if( !is_array( $pollitems ) || !isset( $pollitems[0]['url'] ) ) {
+				return;
+			}
 			$rating_images = array(
 				0 => 'regular_0.png',
 				1 => 'regular_1.png',
