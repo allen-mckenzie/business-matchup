@@ -1,8 +1,8 @@
 <?php
 	/**
-		* Plugin Name:       WP Yelp Polls
-		* Plugin URI:        https://github.com/allen-mckenzie/yelp-polls
-		* Description:       Create custom polls using Yelp and Straw Polls
+		* Plugin Name:       Business Matchup
+		* Plugin URI:        https://github.com/allen-mckenzie/business-matchup
+		* Description:       Create custom polls using Yelp and Straw Polls to let your followers vote for which business they think is the best.
 		* Version:           0.1.0
 		* Requires at least: 5.5
 		* Requires PHP:      7.0
@@ -11,7 +11,7 @@
 		* Author URI:        https://github.com/allen-mckenzie
 		* License:           GPL v3 or later
 		* License URI:       https://www.gnu.org/licenses/gpl-3.0.html
-		* Update URI:        https://github.com/allen-mckenzie/yelp-polls/releases
+		* Update URI:        https://github.com/allen-mckenzie/business-matchup/releases
 		* Text Domain:       yelp-polls
 		* Domain Path:       /languages
 		*

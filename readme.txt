@@ -1,4 +1,4 @@
-= WP Yelp Polls =
+= Business Matchup =
 Contributors: allenmcnichols, AmethystAnswers
 Donate link: https://github.com/sponsors/allen-mckenzie  
 Tags: Yelp, Polls, Community Engagement  
@@ -9,15 +9,15 @@ Stable tag: 0.1.0
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html  
 
-This plugin will access the Yelp API and StrawPoll API to create polls based on a specific business category and city location that can then be shared to social media.
+This plugin will access the Yelp API and StrawPoll API to create polls based on a specific business category and city location that can then be shared to social media allowing your followers to engage and vote for which business they think is the best
 
 == Description ==
 
-WP Yelp Polls helps you generate content by allowing you to specify a specific location and business category to pull information about the top 3 rated businesses in a given city. It then uses this information to create a StrawPoll and generates the necessary content to create a custom post that you can then share on Social Media.
+Business Matchup helps you generate content by allowing you to specify a specific location and business category to pull information about the top 3 rated businesses in a given city. It then uses this information to create a StrawPoll and generates the necessary content to create a custom post that you can then share on Social Media.
 
 == Installation ==
 
-1.  Download the latest release version and unzip the contents in to the `/wp-contnet/plugins/` directory and make sure the name of the new folder is `yelp-polls`
+1.  Download the latest release version and unzip the contents in to the `/wp-content/plugins/` directory and make sure the name of the new folder is `yelp-polls`
 2.  Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
