@@ -5,7 +5,7 @@
 	 * 
 	 * @since 0.1.0
 	 * 
-	 * @param string $yelpAPI contains the Yelp API Key.
+	 * @param string $businessMatchupYelpAPI contains the Yelp API Key.
 	 * @param string $strawAPI contains the StrawPoll API Key.
 	 * @param string API_KEY contains the Yelp API Key.
 	 * @param string STRAWPOLL_API_KEY contains the StrawPoll API Key.
@@ -16,9 +16,9 @@
 	 * @param string DEFAULT_LOCATION specifies the location to use when one isn't provided.
 	 * @param string SEARCH_LIMIT limits the number of business to search for to only the first 3.
 	 */
-	$yelpAPI = get_option( 'yelp_polls_yelp_api' );
-	$strawAPI = get_option( 'yelp_polls_straw_poll_api' );
-	define( 'API_KEY', $yelpAPI );
+	$businessMatchupYelpAPI = get_option( 'business_matchup_yelp_api' );
+	$strawAPI = get_option( 'business_matchup_straw_poll_api' );
+	define( 'API_KEY', $businessMatchupYelpAPI );
 	define( 'STRAWPOLL_API_KEY', $strawAPI );
 	define( 'API_HOST', 'https://api.yelp.com' );
 	define( 'SEARCH_PATH','/v3/businesses/search' );
@@ -28,12 +28,12 @@
 	define( 'SEARCH_LIMIT', 3 );
 
 	/**
-	 * Yelp_API class
+	 * Business_Matchup_API class
 	 * This class defines the actions taken to access the API's
 	 * 
 	 * @since 0.1.0
 	 */
-	class Yelp_API {
+	class Business_Matchup_API {
 
 		/**
 		 * doAPI function
@@ -91,7 +91,7 @@
 		 * @since 0.1.0
 		 * 
 		 * @param integer $business_id is the ID number of the business in Yelp.
-		 * @return array response output from the Yelp_API for the given call.
+		 * @return array response output from the Business_Matchup_API for the given call.
 		 */
 		function get_business( $business_id ) {
 			$business_path = BUSINESS_PATH . urlencode($business_id);
@@ -161,16 +161,16 @@
 		 * @return string $pollHTML is the formatted HTML containing our new poll.
 		 */
 		public function addPoll( $postID, $term, $bizLoc ) {
-			$yelpAPI = new Yelp_API();
-			$yelpPollsPage = new Yelp_Polls_Page();
-			$response = $yelpAPI->search( $term, $bizLoc );
+			$businessMatchupYelpAPI = new Business_Matchup_API();
+			$businessMatchupPage = new Business_Matchup_Polls_Page();
+			$response = $businessMatchupYelpAPI->search( $term, $bizLoc );
 			if( null === $response) {
 				return;
 			}
 			$response_body = wp_remote_retrieve_body( $response );
-			update_post_meta( $postID, '_yelp_polls_yelp_results', $response_body );
-			$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
-			$pollitems = $yelpPollsPage->buildPollItems($response_body);
+			update_post_meta( $postID, '_business_matchup_yelp_results', $response_body );
+			$response_body = json_decode( get_post_meta( $postID, '_business_matchup_yelp_results', true ), true );
+			$pollitems = $businessMatchupPage->buildPollItems($response_body);
 			$bizLoc_array = explode(",",$bizLoc);
 			$city = $bizLoc_array[0];
 			$answers = array();
@@ -189,7 +189,7 @@
 				)
 			);
 			$poll_json = json_encode( $poll_array );
-			$pollHTML = $yelpAPI->createPoll( $poll_json );
+			$pollHTML = $businessMatchupYelpAPI->createPoll( $poll_json );
 			return $pollHTML;
 		}
 

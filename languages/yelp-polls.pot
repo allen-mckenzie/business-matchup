@@ -1,10 +1,10 @@
-# Copyright (C) 2022 Allen McKenzie
-# This file is distributed under the GPL v3 or later.
+# Copyright (C) 2022
+# This file is distributed under the same license as the  package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Yelp Polls 0.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yelp-polls\n"
-"POT-Creation-Date: 2022-02-26 17:33:36+00:00\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-business-matchup-polls\n"
+"POT-Creation-Date: 2022-03-15 23:05:21+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,173 +24,153 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: yelp-polls.php:198
+#: wp-business-matchup-polls.php:198
 msgid "Add New"
 msgstr ""
 
-#: yelp-polls.php:199
-msgid "Add New Yelp Poll"
+#: wp-business-matchup-polls.php:199
+msgid "Add New Business Matchup Poll"
 msgstr ""
 
-#: yelp-polls.php:200
-msgid "New Yelp Poll"
+#: wp-business-matchup-polls.php:200
+msgid "New Business Matchup Poll"
 msgstr ""
 
-#: yelp-polls.php:201
-msgid "Edit Yelp Poll"
+#: wp-business-matchup-polls.php:201
+msgid "Edit Business Matchup Poll"
 msgstr ""
 
-#: yelp-polls.php:202
-msgid "View Yelp Poll"
+#: wp-business-matchup-polls.php:202
+msgid "View Business Matchup Poll"
 msgstr ""
 
-#: yelp-polls.php:203
+#: wp-business-matchup-polls.php:203
 msgid "All Polls"
 msgstr ""
 
-#: yelp-polls.php:204
-msgid "Search Yelp Polls"
+#: wp-business-matchup-polls.php:204
+msgid "Search Business Matchup Polls"
 msgstr ""
 
-#: yelp-polls.php:205
-msgid "Parent Yelp Polls:"
+#: wp-business-matchup-polls.php:205
+msgid "Parent Business Matchup Polls:"
 msgstr ""
 
-#: yelp-polls.php:206
-msgid "No Yelp Polls found."
+#: wp-business-matchup-polls.php:206
+msgid "No Business Matchup Polls found."
 msgstr ""
 
-#: yelp-polls.php:207
-msgid "No Yelp Polls found in Trash."
+#: wp-business-matchup-polls.php:207
+msgid "No Business Matchup Polls found in Trash."
 msgstr ""
 
-#: yelp-polls.php:252
+#: wp-business-matchup-polls.php:252
 msgid "Business Location"
 msgstr ""
 
-#: yelp-polls.php:263
+#: wp-business-matchup-polls.php:263
 msgid "Business Type"
 msgstr ""
 
-#: yelp-polls.php:331
+#: wp-business-matchup-polls.php:331
 msgid "City, State Abbreviate. Example: San Francisco, CA"
 msgstr ""
 
-#: yelp-polls.php:354
+#: wp-business-matchup-polls.php:354
 msgid "Entertainment, Restaurant, Fine Dining, Pizza, etc..."
 msgstr ""
 
-#: yelp-polls.php:442
+#: wp-business-matchup-polls.php:442
 msgid "Your API Key's were saved."
 msgstr ""
 
-#: yelp-polls.php:457
+#: wp-business-matchup-polls.php:457
 msgid "Uh uh uh... you didn\\t say the magic word..."
 msgstr ""
 
-#. Plugin Name of the plugin/theme
-msgid "Yelp Polls"
-msgstr ""
-
-#. Plugin URI of the plugin/theme
-msgid "https://github.com/allen-mckenzie/yelp-polls"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid "Create custom polls using Yelp and Straw Polls"
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "Allen McKenzie"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "https://github.com/allen-mckenzie"
-msgstr ""
-
-#: yelp-polls.php:194
+#: wp-business-matchup-polls.php:194
 msgctxt "Post type general name"
-msgid "Yelp Polls"
+msgid "Business Matchup Polls"
 msgstr ""
 
-#: yelp-polls.php:195
+#: wp-business-matchup-polls.php:195
 msgctxt "Post type singular name"
-msgid "Yelp Poll"
+msgid "Business Matchup Poll"
 msgstr ""
 
-#: yelp-polls.php:196
+#: wp-business-matchup-polls.php:196
 msgctxt "Admin Menu text"
-msgid "Yelp Polls"
+msgid "Business Matchup Polls"
 msgstr ""
 
-#: yelp-polls.php:197
+#: wp-business-matchup-polls.php:197
 msgctxt "Add New on Toolbar"
-msgid "Yelp Poll"
+msgid "Business Matchup Poll"
 msgstr ""
 
-#: yelp-polls.php:208
+#: wp-business-matchup-polls.php:208
 msgctxt "Overrides the “Featured Image” phrase for this post type. Added in 4.3"
-msgid "Yelp Poll Cover Image"
+msgid "Business Matchup Poll Cover Image"
 msgstr ""
 
-#: yelp-polls.php:209
+#: wp-business-matchup-polls.php:209
 msgctxt "Overrides the “Set featured image” phrase for this post type. Added in 4.3"
 msgid "Set cover image"
 msgstr ""
 
-#: yelp-polls.php:210
+#: wp-business-matchup-polls.php:210
 msgctxt ""
 "Overrides the “Remove featured image” phrase for this post type. Added in "
 "4.3"
 msgid "Remove cover image"
 msgstr ""
 
-#: yelp-polls.php:211
+#: wp-business-matchup-polls.php:211
 msgctxt ""
 "Overrides the “Use as featured image” phrase for this post type. Added in "
 "4.3"
 msgid "Use as cover image"
 msgstr ""
 
-#: yelp-polls.php:212
+#: wp-business-matchup-polls.php:212
 msgctxt ""
 "The post type archive label used in nav menus. Default “Post Archives”. "
 "Added in 4.4"
-msgid "Yelp Poll archives"
+msgid "Business Matchup Poll archives"
 msgstr ""
 
-#: yelp-polls.php:213
+#: wp-business-matchup-polls.php:213
 msgctxt ""
 "Overrides the “Insert into post”/”Insert into page” phrase (used when "
 "inserting media into a post). Added in 4.4"
-msgid "Insert into Yelp Poll"
+msgid "Insert into Business Matchup Poll"
 msgstr ""
 
-#: yelp-polls.php:214
+#: wp-business-matchup-polls.php:214
 msgctxt ""
 "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used "
 "when viewing media attached to a post). Added in 4.4"
-msgid "Uploaded to this Yelp Poll"
+msgid "Uploaded to this Business Matchup Poll"
 msgstr ""
 
-#: yelp-polls.php:215
+#: wp-business-matchup-polls.php:215
 msgctxt ""
 "Screen reader text for the filter links heading on the post type listing "
 "screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
-msgid "Filter Yelp Polls list"
+msgid "Filter Business Matchup Polls list"
 msgstr ""
 
-#: yelp-polls.php:216
+#: wp-business-matchup-polls.php:216
 msgctxt ""
 "Screen reader text for the pagination heading on the post type listing "
 "screen. Default “Posts list navigation”/”Pages list navigation”. Added in "
 "4.4"
-msgid "Yelp Polls list navigation"
+msgid "Business Matchup Polls list navigation"
 msgstr ""
 
-#: yelp-polls.php:217
+#: wp-business-matchup-polls.php:217
 msgctxt ""
 "Screen reader text for the items list heading on the post type listing "
 "screen. Default “Posts list”/”Pages list”. Added in 4.4"
-msgid "Yelp Polls list"
+msgid "Business Matchup Polls list"
 msgstr ""

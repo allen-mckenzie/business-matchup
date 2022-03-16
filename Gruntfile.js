@@ -9,7 +9,7 @@ module.exports = function( grunt ) {
 
 		addtextdomain: {
 			options: {
-				textdomain: "yelp-polls",
+				textdomain: "business-matchup-polls",
 			},
 			updateAllDomains: {
 				options: {
@@ -32,8 +32,8 @@ module.exports = function( grunt ) {
 				options: {
 					domainPath: "/languages",
 					exclude: [ "\.git/*", "bin/*", "node_modules/*", "tests/*" ],
-					mainFile: "yelp-polls.php",
-					potFilename: "yelp-polls.pot",
+					mainFile: "business-matchup-polls.php",
+					potFilename: "business-matchup-polls.pot",
 					potHeaders: {
 						poedit: true,
 						"x-poedit-keywordslist": true
