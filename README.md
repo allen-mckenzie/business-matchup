@@ -34,9 +34,9 @@ Getting a Yelp API Key:
     ![enter-new-app-details](https://user-images.githubusercontent.com/43300142/158496510-46346d71-2222-4986-b670-a70f9bcd4ebd.png)
 3.  If you see an error message when you create your new app because you didn't verify your email. Go do that and try again.
     ![create-app-error](https://user-images.githubusercontent.com/43300142/158496522-bbac1b97-f03b-4af2-917c-303af76bde6d.png)
-5.  You should see a success messages that says, "Great your app has been created!"
+4.  You should see a success messages that says, "Great your app has been created!"
     ![create-app-sucess](https://user-images.githubusercontent.com/43300142/158496541-f45bfa74-1ce9-4ae1-aff9-846da6612413.png)
-6.  Copy your new API details and save them in a safe location
+5.  Copy your new API details and save them in a safe location
 
 ### What about my StrawPoll API Key ###
 
