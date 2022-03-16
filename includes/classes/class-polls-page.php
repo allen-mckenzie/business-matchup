@@ -1,15 +1,15 @@
 <?php
 
 	/**
-	 * Yelp_Polls_Page class
+	 * Business_Matchup_Page class
 	 * This class contains the functions needed to create and display the content for our custom post type.
 	 * 
 	 * @since 0.1.0
 	 */
-    class Yelp_Polls_Page {
+    class Business_Matchup_Polls_Page {
 
 		/**
-		 * yelp_polls_content function
+		 * business_matchup_content function
 		 * This function displays the gathered information from the Yelp API and Straw Poll API based on the 
 		 * information provided in the custom metaboxes for the content of the Custom Post Type Front End.
 		 * 
@@ -18,30 +18,35 @@
 		 * @param array $content is the array containing the page content for the given post.
 		 * @return array $content for the custom post type after generating it from the data we retrieved.
 		 */
-        public function yelp_polls_content($content) {
+        public function business_matchup_content($content) {
+			$business_matchup_page = new Business_Matchup_Polls_Page();
 			global $post;
 			$postID = $post->ID;
-			$type = get_post_meta( $postID, '_yelp_polls_type', true );
-			$bizLoc = get_post_meta( $postID, '_yelp_polls_business_location', true );
-			$poll = get_post_meta( $postID, '_yelp_polls_poll', true );
+			$type = get_post_meta( $postID, '_business_matchup_type', true );
+			$bizLoc = get_post_meta( $postID, '_business_matchup_business_location', true );
+			$poll = get_post_meta( $postID, '_business_matchup_poll', true );
 			$bizLoc_array = explode(",",$bizLoc);
 			$city = $bizLoc_array[0];
-			$response_body = json_decode( get_post_meta( $postID, '_yelp_polls_yelp_results', true ), true );
-			$pollitems = $this->buildPollItems($response_body);
-			$content = '<section id="yelp-polls">';
-			if ($post->post_type == 'yelp-polls') {
+			$response_body = json_decode( get_post_meta( $postID, '_business_matchup_yelp_results', true ), true );
+			$pollitems = $business_matchup_page->buildPollItems($response_body);
+			$content = '<section id="business-matchups">';
+			if ($post->post_type == 'business-matchups') {
 				$content .= '
-					<h1> '.$type.' locations near '.$city.'</h1>
-					<hr/>
-					<section class="yelp-polls-content">
+					<div id="business-matchups-title">
+						<h1> '.$type.' locations near '.$city.'</h1>
+						<hr/>
+					</div>
+					<section id="business-matchups-content">
 						<div class="cards">
-							<div class="card card-1">'.$this->cardContent( $pollitems, 0 ).'</div>
-							<div class="card card-2">'.$this->cardContent( $pollitems, 1 ).'</div>
-							<div class="card card-3">'.$this->cardContent( $pollitems, 2 ).'</div>
+							<div class="card card-1">'.$business_matchup_page->cardContent( $pollitems, 0 ).'</div>
+							<div class="card card-2">'.$business_matchup_page->cardContent( $pollitems, 1 ).'</div>
+							<div class="card card-3">'.$business_matchup_page->cardContent( $pollitems, 2 ).'</div>
 						</div>
 					</section>
 				';
+				$content .= '<div id="strawpolls-content">';
 				$content .= $poll;
+				$content .= '</div>';
 				$content .= '</section>';
 			}
 			return $content;

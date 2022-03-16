@@ -17,7 +17,7 @@ Business Matchup helps you generate content by allowing you to specify a specifi
 
 ## Installation ##
 
-1.  Download the latest release version and unzip the contents in to the `/wp-contnet/plugins/` directory and make sure the name of the new folder is `yelp-polls`
+1.  Download the latest release version and unzip the contents in to the `/wp-contnet/plugins/` directory and make sure the name of the new folder is `business-matchup-polls`
 2.  Activate the plugin through the 'Plugins' menu in WordPress
 
 ## Frequently Asked Questions ##
@@ -52,7 +52,7 @@ Code cleanup and prep for the first release and review
 ### 0.0.3 ###
 
 Added initial configuration hooks for Yelp API and StrawPoll API integration.
-Fixed custom post type slug to be yelp-poll and yelp-polls respectively.
+Fixed custom post type slug to be business-matchup-poll and business-matchup-polls respectively.
 Bug: relocating settings section into the post type management section soon.
 
 ### 0.0.2 ###
