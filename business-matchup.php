@@ -3,7 +3,7 @@
 		* Plugin Name:       Business Matchup
 		* Plugin URI:        https://github.com/allen-mckenzie/business-matchup
 		* Description:       Create custom polls using Yelp and Straw Polls to let your followers vote for which business they think is the best.
-		* Version:           0.1.0
+		* Version:           0.1.1
 		* Requires at least: 5.5
 		* Requires PHP:      7.0
 		* Author:            Allen McKenzie

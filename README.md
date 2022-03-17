@@ -68,6 +68,12 @@ Getting a Yelp API Key:
 
 Here is the Changelog
 
+### 0.1.1 ###
+
+Fixed declared default constanst to have unique prefixes. Instead of API_KEY this plugin uses the prefix BM_ to make this BM_API_KEY
+Added assets for the plugin icon and banner images
+Added documentation for plugin configuration and integration with Yelp and StrawPoll
+
 ### 0.1.0 ###
 
 Code cleanup and prep for the first release and review

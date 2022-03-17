@@ -3,35 +3,35 @@
 	/**
 	 * Configuration Details and Defining Our Global Constants
 	 * 
-	 * @since 0.1.0
+	 * @since 0.1.1
 	 * 
 	 * @param string $businessMatchupYelpAPI contains the Yelp API Key.
 	 * @param string $strawAPI contains the StrawPoll API Key.
-	 * @param string API_KEY contains the Yelp API Key.
-	 * @param string STRAWPOLL_API_KEY contains the StrawPoll API Key.
-	 * @param string API_HOST contains the URL base for the Yelp API.
-	 * @param string SEARCH_PATH specifies the Yelp API Endpoint for searches.
-	 * @param string BUSINESS_PATH specifies the Yelp API Endoint for business data.
-	 * @param string DEFAULT_TERM specifies the term to use when one isn't provided.
-	 * @param string DEFAULT_LOCATION specifies the location to use when one isn't provided.
-	 * @param string SEARCH_LIMIT limits the number of business to search for to only the first 3.
+	 * @param string BM_API_KEY contains the Yelp API Key.
+	 * @param string BM_STRAWPOLL_API_KEY contains the StrawPoll API Key.
+	 * @param string BM_API_HOST contains the URL base for the Yelp API.
+	 * @param string BM_SEARCH_PATH specifies the Yelp API Endpoint for searches.
+	 * @param string BM_BUSINESS_PATH specifies the Yelp API Endoint for business data.
+	 * @param string BM_DEFAULT_TERM specifies the term to use when one isn't provided.
+	 * @param string BM_DEFAULT_LOCATION specifies the location to use when one isn't provided.
+	 * @param string BM_SEARCH_LIMIT limits the number of business to search for to only the first 3.
 	 */
 	$businessMatchupYelpAPI = get_option( 'business_matchup_yelp_api' );
 	$strawAPI = get_option( 'business_matchup_straw_poll_api' );
-	define( 'API_KEY', $businessMatchupYelpAPI );
-	define( 'STRAWPOLL_API_KEY', $strawAPI );
-	define( 'API_HOST', 'https://api.yelp.com' );
-	define( 'SEARCH_PATH','/v3/businesses/search' );
-	define( 'BUSINESS_PATH', '/v3/businesses/' );
-	define( 'DEFAULT_TERM', 'dinner' );
-	define( 'DEFAULT_LOCATION','San Francisco, CA' );
-	define( 'SEARCH_LIMIT', 3 );
+	define( 'BM_API_KEY', $businessMatchupYelpAPI );
+	define( 'BM_STRAWPOLL_API_KEY', $strawAPI );
+	define( 'BM_API_HOST', 'https://api.yelp.com' );
+	define( 'BM_SEARCH_PATH','/v3/businesses/search' );
+	define( 'BM_BUSINESS_PATH', '/v3/businesses/' );
+	define( 'BM_DEFAULT_TERM', 'dinner' );
+	define( 'BM_DEFAULT_LOCATION','San Francisco, CA' );
+	define( 'BM_SEARCH_LIMIT', 3 );
 
 	/**
 	 * Business_Matchup_API class
 	 * This class defines the actions taken to access the API's
 	 * 
-	 * @since 0.1.0
+	 * @since 0.1.1
 	 */
 	class Business_Matchup_API {
 
@@ -49,7 +49,7 @@
 		function doAPI( $api_url, $path, $url_params = array() ) {
 			$query = http_build_query( $url_params );
 			$api_url = $api_url."".$path."?".$query;
-			$api_key = API_KEY;
+			$api_key = BM_API_KEY;
 			if( $api_key === '' ) {
 				return;
 			}
@@ -69,7 +69,7 @@
 		 * search function
 		 * This function creates the paramaters needed to submit a search to the Yelp API.
 		 * 
-		 * @since 0.1.0
+		 * @since 0.1.1
 		 * 
 		 * @param string $term contains the type of business we want to look for.
 		 * @param string $businessLocation contains the City and State-Abbreviation where we want to look for those businesses.
@@ -79,8 +79,8 @@
 			$url_params = array();
 			$url_params['term'] = $term;
 			$url_params['location'] = $businessLocation;
-			$url_params['limit'] = SEARCH_LIMIT;
-			$result = $this->doAPI(API_HOST, SEARCH_PATH, $url_params);
+			$url_params['limit'] = BM_SEARCH_LIMIT;
+			$result = $this->doAPI(BM_API_HOST, BM_SEARCH_PATH, $url_params);
 			return $result;
 		}
 
@@ -94,8 +94,8 @@
 		 * @return array response output from the Business_Matchup_API for the given call.
 		 */
 		function get_business( $business_id ) {
-			$business_path = BUSINESS_PATH . urlencode($business_id);
-			return $this->doAPI(API_HOST, $business_path);
+			$business_path = BM_BUSINESS_PATH . urlencode($business_id);
+			return $this->doAPI(BM_API_HOST, $business_path);
 		}
 		
 		/**
@@ -118,7 +118,7 @@
 		 * createPoll function
 		 * This function creates a new Poll on StrawPoll using the StrawPoll API using the information provided in $poll_json.
 		 * 
-		 * @since 0.1.0
+		 * @since 0.1.1
 		 * 
 		 * @param string $poll_json JSON object containing the details of the businesses we are creating a poll for.
 		 * @return string $html contains the formatted iFrame that will be used in the content of our custom post type.
@@ -129,7 +129,7 @@
 			$headers = array(
 				'user-agent' => '',
 				'Content-Type' => 'application/json',
-				'X-API-KEY' => STRAWPOLL_API_KEY
+				'X-API-KEY' => BM_STRAWPOLL_API_KEY
 			);
 			$args = array(
 				'method' => 'POST',
