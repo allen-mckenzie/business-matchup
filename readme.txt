@@ -5,7 +5,7 @@ Tags: Yelp, Polls, Community Engagement
 Requires at least: 5.8  
 Tested up to: 5.9  
 Requires PHP: 7.0  
-Stable tag: 0.1.0  
+Stable tag: 0.1.2  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -72,6 +72,10 @@ This is an upgrade notice
 == Changelog == 
 
 Here is the Changelog
+
+=== 0.1.2 ===
+
+Fixed declared default constants to have unique 4 letter prefixes.
 
 === 0.1.1 ===
 

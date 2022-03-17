@@ -7,25 +7,25 @@
 	 * 
 	 * @param string $businessMatchupYelpAPI contains the Yelp API Key.
 	 * @param string $strawAPI contains the StrawPoll API Key.
-	 * @param string BM_API_KEY contains the Yelp API Key.
-	 * @param string BM_STRAWPOLL_API_KEY contains the StrawPoll API Key.
-	 * @param string BM_API_HOST contains the URL base for the Yelp API.
-	 * @param string BM_SEARCH_PATH specifies the Yelp API Endpoint for searches.
-	 * @param string BM_BUSINESS_PATH specifies the Yelp API Endoint for business data.
-	 * @param string BM_DEFAULT_TERM specifies the term to use when one isn't provided.
-	 * @param string BM_DEFAULT_LOCATION specifies the location to use when one isn't provided.
-	 * @param string BM_SEARCH_LIMIT limits the number of business to search for to only the first 3.
+	 * @param string BIZM_API_KEY contains the Yelp API Key.
+	 * @param string BIZM_STRAWPOLL_API_KEY contains the StrawPoll API Key.
+	 * @param string BIZM_API_HOST contains the URL base for the Yelp API.
+	 * @param string BIZM_SEARCH_PATH specifies the Yelp API Endpoint for searches.
+	 * @param string BIZM_BUSINESS_PATH specifies the Yelp API Endoint for business data.
+	 * @param string BIZM_DEFAULT_TERM specifies the term to use when one isn't provided.
+	 * @param string BIZM_DEFAULT_LOCATION specifies the location to use when one isn't provided.
+	 * @param string BIZM_SEARCH_LIMIT limits the number of business to search for to only the first 3.
 	 */
 	$businessMatchupYelpAPI = get_option( 'business_matchup_yelp_api' );
 	$strawAPI = get_option( 'business_matchup_straw_poll_api' );
-	define( 'BM_API_KEY', $businessMatchupYelpAPI );
-	define( 'BM_STRAWPOLL_API_KEY', $strawAPI );
-	define( 'BM_API_HOST', 'https://api.yelp.com' );
-	define( 'BM_SEARCH_PATH','/v3/businesses/search' );
-	define( 'BM_BUSINESS_PATH', '/v3/businesses/' );
-	define( 'BM_DEFAULT_TERM', 'dinner' );
-	define( 'BM_DEFAULT_LOCATION','San Francisco, CA' );
-	define( 'BM_SEARCH_LIMIT', 3 );
+	define( 'BIZM_API_KEY', $businessMatchupYelpAPI );
+	define( 'BIZM_STRAWPOLL_API_KEY', $strawAPI );
+	define( 'BIZM_API_HOST', 'https://api.yelp.com' );
+	define( 'BIZM_SEARCH_PATH','/v3/businesses/search' );
+	define( 'BIZM_BUSINESS_PATH', '/v3/businesses/' );
+	define( 'BIZM_DEFAULT_TERM', 'dinner' );
+	define( 'BIZM_DEFAULT_LOCATION','San Francisco, CA' );
+	define( 'BIZM_SEARCH_LIMIT', 3 );
 
 	/**
 	 * Business_Matchup_API class
@@ -49,7 +49,7 @@
 		function doAPI( $api_url, $path, $url_params = array() ) {
 			$query = http_build_query( $url_params );
 			$api_url = $api_url."".$path."?".$query;
-			$api_key = BM_API_KEY;
+			$api_key = BIZM_API_KEY;
 			if( $api_key === '' ) {
 				return;
 			}
@@ -79,8 +79,8 @@
 			$url_params = array();
 			$url_params['term'] = $term;
 			$url_params['location'] = $businessLocation;
-			$url_params['limit'] = BM_SEARCH_LIMIT;
-			$result = $this->doAPI(BM_API_HOST, BM_SEARCH_PATH, $url_params);
+			$url_params['limit'] = BIZM_SEARCH_LIMIT;
+			$result = $this->doAPI(BIZM_API_HOST, BIZM_SEARCH_PATH, $url_params);
 			return $result;
 		}
 
@@ -94,8 +94,8 @@
 		 * @return array response output from the Business_Matchup_API for the given call.
 		 */
 		function get_business( $business_id ) {
-			$business_path = BM_BUSINESS_PATH . urlencode($business_id);
-			return $this->doAPI(BM_API_HOST, $business_path);
+			$business_path = BIZM_BUSINESS_PATH . urlencode($business_id);
+			return $this->doAPI(BIZM_API_HOST, $business_path);
 		}
 		
 		/**
@@ -129,7 +129,7 @@
 			$headers = array(
 				'user-agent' => '',
 				'Content-Type' => 'application/json',
-				'X-API-KEY' => BM_STRAWPOLL_API_KEY
+				'X-API-KEY' => BIZM_STRAWPOLL_API_KEY
 			);
 			$args = array(
 				'method' => 'POST',
