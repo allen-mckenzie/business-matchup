@@ -70,7 +70,7 @@ Here is the Changelog
 
 ### 0.1.1 ###
 
-Fixed declared default constanst to have unique prefixes. Instead of API_KEY this plugin uses the prefix BM_ to make this BM_API_KEY
+Fixed declared default constants to have unique prefixes. Instead of API_KEY this plugin uses the prefix BM_ to make this BM_API_KEY
 Added assets for the plugin icon and banner images
 Added documentation for plugin configuration and integration with Yelp and StrawPoll
 
