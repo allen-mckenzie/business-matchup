@@ -1,5 +1,5 @@
 <?php
-	
+	namespace BusinessMatchup;
 	/**
 	 * Configuration Details and Defining Our Global Constants
 	 * 
@@ -34,7 +34,7 @@
 	 * @since 0.1.1
 	 */
 	class Business_Matchup_API {
-
+		
 		/**
 		 * doAPI function
 		 * This function defines the request to perform the Yelp API calls.

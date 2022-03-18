@@ -19,39 +19,43 @@
 	*/
 
 	if( !defined( 'ABSPATH' ) ) return; // None shall pass
-	
-	/**
-	 * business_matchup_autoload_classes function
-	 * Include our classes
-	 * All Business Matchup Polls classes are prefixed with `Business_`
-	 * 
-	 * @since 0.1.0
-	 * 
-	 * @param type $class_name string containing file name.
-	 */
-	function business_matchup_autoload_classes( $class_name ) {
-		$businessMatchup = new Business_Matchup();
-		if ( 0 !== strpos( $class_name, 'Business_Matchup_' ) ) {
-			return;
-		}
-		$filename = strtolower(
-			str_replace(
-				'_',
-				'-',
-				substr( $class_name, strlen( 'Business_Matchup_' ) )
-			)
-		);
-		// var_dump('includes/classes/class-' . $filename);
-		$businessMatchup->include_file( 'includes/classes/class-' . $filename );
-	}
 
 	/**
-	 * spl_autoload_register
-	 * Registers all of the classes found by the autoloader
+	 * Register the Autoloader
 	 * 
-	 * @since 0.1.0
+	 * @since 0.1.3
 	 */
-	spl_autoload_register( 'business_matchup_autoload_classes' );
+	spl_autoload_register('business_matchup_autoloader');
+
+	/**
+	 * business_matchup_autoloader function
+	 * Include our classes
+	 * All Business Matchup classes are prefixed with `Business_Matchup`
+	 * 
+	 * @since 0.1.3
+	 * 
+	 * @param type $class string containing file name.
+	 */
+	function business_matchup_autoloader( $class ) {
+
+		$namespace = 'BusinessMatchup';
+
+		if( strpos( $class, $namespace ) !== 0 ) {
+			return;
+		}
+
+		$class = str_replace( $namespace, '', $class );
+		$class = str_replace( '\\', '',$class );
+		$class = str_replace( '\\', DIRECTORY_SEPARATOR, 'class-' . strtolower( $class ) );
+		$class = str_replace( '_', '-',$class );
+
+		$path = dirname(__FILE__) .  DIRECTORY_SEPARATOR . 'includes/classes' . DIRECTORY_SEPARATOR . $class . '.php';
+	 
+		if (file_exists($path)) {
+			require_once($path);
+		}
+
+	}
 
 	/**
 	 * Define the Business Matchup Polls Plugin Dir
@@ -73,39 +77,10 @@
 		 */
 		protected static $single_instance;
 
-		/**
-		 * include_file function
-		 * Check our directory for any files ending with .php
-		 * 
-		 * @since 0.1.3
-		 * 
-		 * @param type $filename string containing the name of the file
-		 * @return boolean True/False if file was found
-		 */
-		public static function include_file( $filename ) {
-			$file = self::dir( $filename . '.php' );
-			if ( ! is_file( $file ) ) {	// This check is necessary to find our php files containing our class definitions.
-				return false;
-			}
-			include_once realpath( $file ); // This issue continues to elude me. How do we includ or require a file without using one of these commands?
-			return true;
-		}
-
-		/**
-		 * dir function
-		 * Create paths with trailing slashes based on the provide path
-		 * 
-		 * @since 0.1.0
-		 * 
-		 * @param type $path string with the name of the path
-		 * @return string $dir . $path formatted directory path
-		 */
-		public static function dir( $path = '' ) {
-			static $dir;
-			$dir = $dir ? $dir : trailingslashit( __DIR__ );
-			return $dir . $path;
-		}
-
+		// public function __construct() {
+		// 	$BusinessMatchupAPI = new Business_Matchup_API();
+		// 	$BusinessMatchupPollsPage = new Business_Matchup_Polls_Page();
+		// }
 		/**
 		 * hooks function
 		 * Plugin intialization action, filters, and hooks go here
@@ -282,7 +257,7 @@
 		 * @return integer $post_id if performing verification fails or if performing an autosave
 		 */
 		public function save( $post_id ) {
-			$businessMatchupYelpAPI = new Business_Matchup_API();
+			$businessMatchupYelpAPI = new \BusinessMatchup\Business_Matchup_API();
 			if ( ! wp_verify_nonce( filter_input( INPUT_POST, 'business_matchup_metabox_nonce'), 'business_matchup_metabox' ) ) {
 				return $post_id;
 			}
@@ -375,7 +350,7 @@
 		 * @return array $content for the custom post type after generating it from the data we retrieved.
 		 */
 		public function business_matchup_content($content) {
-			$business_matchup_page = new Business_Matchup_Polls_Page();
+			$business_matchup_page = new \BusinessMatchup\Business_Matchup_Polls_Page();
 			global $post;
 			$postID = $post->ID;
 			$type = get_post_meta( $postID, '_business_matchup_type', true );

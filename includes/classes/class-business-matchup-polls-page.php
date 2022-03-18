@@ -1,4 +1,5 @@
 <?php
+	namespace BusinessMatchup;
 
 	/**
 	 * Business_Matchup_Page class
