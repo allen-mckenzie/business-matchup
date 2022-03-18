@@ -3,7 +3,7 @@
 		* Plugin Name:       Business Matchup
 		* Plugin URI:        https://github.com/allen-mckenzie/business-matchup
 		* Description:       Create custom polls using Yelp and Straw Polls to let your followers vote for which business they think is the best.
-		* Version:           0.1.2
+		* Version:           0.1.3
 		* Requires at least: 5.5
 		* Requires PHP:      7.0
 		* Author:            Allen McKenzie
@@ -77,7 +77,7 @@
 		 * include_file function
 		 * Check our directory for any files ending with .php
 		 * 
-		 * @since 0.1.0
+		 * @since 0.1.3
 		 * 
 		 * @param type $filename string containing the name of the file
 		 * @return boolean True/False if file was found
@@ -87,7 +87,7 @@
 			if ( ! is_file( $file ) ) {	// This check is necessary to find our php files containing our class definitions.
 				return false;
 			}
-			include_once $file; // This issue continues to elude me. How do we includ or require a file without using one of these commands?
+			include_once realpath( $file ); // This issue continues to elude me. How do we includ or require a file without using one of these commands?
 			return true;
 		}
 
