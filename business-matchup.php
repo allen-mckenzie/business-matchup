@@ -20,42 +20,7 @@
 
 	if( !defined( 'ABSPATH' ) ) return; // None shall pass
 
-	/**
-	 * Register the Autoloader
-	 * 
-	 * @since 0.1.3
-	 */
-	spl_autoload_register('business_matchup_autoloader');
-
-	/**
-	 * business_matchup_autoloader function
-	 * Include our classes
-	 * All Business Matchup classes are prefixed with `Business_Matchup`
-	 * 
-	 * @since 0.1.3
-	 * 
-	 * @param type $class string containing file name.
-	 */
-	function business_matchup_autoloader( $class ) {
-
-		$namespace = 'BusinessMatchup';
-
-		if( strpos( $class, $namespace ) !== 0 ) {
-			return;
-		}
-
-		$class = str_replace( $namespace, '', $class );
-		$class = str_replace( '\\', '',$class );
-		$class = str_replace( '\\', DIRECTORY_SEPARATOR, 'class-' . strtolower( $class ) );
-		$class = str_replace( '_', '-',$class );
-
-		$path = dirname(__FILE__) .  DIRECTORY_SEPARATOR . 'includes/classes' . DIRECTORY_SEPARATOR . $class . '.php';
-	 
-		if ( is_file( $path ) ) {
-			require_once $path;
-		}
-
-	}
+	require 'vendor/autoload.php'; // Require the composer autoloader
 
 	/**
 	 * Define the Business Matchup Polls Plugin Dir

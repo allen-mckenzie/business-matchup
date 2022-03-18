@@ -1,0 +1,11 @@
+{
+    "autoload": {
+        "files": [
+            "includes/classes/class-business-matchup-polls-page.php",
+            "includes/classes/class-business-matchup-api.php"
+        ],
+        "psr-4": {
+            "BusinessMatchup\\": "includes/classes/"
+        }
+    }
+}
