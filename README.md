@@ -29,13 +29,21 @@ Here are some frequently asked questions
 Getting a Yelp API Key:
 
 1.  If you don't already have a Yelp account go to: https://yelp.com/ and signup.
+
 2.  After you login go to https://www.yelp.com/developers/v3/manage_app and create a new app.
+
     ![create-app-page](https://user-images.githubusercontent.com/43300142/158496476-2c1d5522-986d-41cb-9150-021cd0a491e8.png)
+
     ![enter-new-app-details](https://user-images.githubusercontent.com/43300142/158496510-46346d71-2222-4986-b670-a70f9bcd4ebd.png)
+
 3.  If you see an error message when you create your new app because you didn't verify your email. Go do that and try again.
+
     ![create-app-error](https://user-images.githubusercontent.com/43300142/158496522-bbac1b97-f03b-4af2-917c-303af76bde6d.png)
+
 4.  You should see a success messages that says, "Great your app has been created!"
+
     ![create-app-sucess](https://user-images.githubusercontent.com/43300142/158496541-f45bfa74-1ce9-4ae1-aff9-846da6612413.png)
+    
 5.  Copy your new API details and save them in a safe location
 
 ### What about my StrawPoll API Key ###
