@@ -90,7 +90,9 @@ Here is the Changelog
 
 ### 0.1.3 ###
 
-Use realpath when including files
+Enhancement use composer autoloader to define and load classes
+Corrections updated README.md and README.txt to have new lines after line itemes
+Cleanup refactored functions and defined new classes to limit the number of nongetter and setters
 
 ### 0.1.2 ###
 
