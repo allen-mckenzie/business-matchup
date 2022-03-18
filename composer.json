@@ -1,6 +1,8 @@
 {
     "autoload": {
         "files": [
+            "includes/classes/class-business-matchup-cpt.php",
+            "includes/classes/class-business-matchup-settings.php",
             "includes/classes/class-business-matchup-polls-page.php",
             "includes/classes/class-business-matchup-api.php"
         ],

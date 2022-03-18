@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    '54427b3bde4cd549d15a05029bc5fadc' => $baseDir . '/includes/classes/class-business-matchup-cpt.php',
+    '753dff471c115229bd6befc0a298a613' => $baseDir . '/includes/classes/class-business-matchup-settings.php',
     '1715dc798e8a5e69c777dd9d63595950' => $baseDir . '/includes/classes/class-business-matchup-polls-page.php',
     'b92b0b7d953b1a686fdd57f2907c5aa9' => $baseDir . '/includes/classes/class-business-matchup-api.php',
 );

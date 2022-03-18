@@ -10,6 +10,36 @@
     class Business_Matchup_Polls_Page {
 
 		/**
+		 * business_matchup_styles function
+		 * This function enqueues our custom styles.
+		 * 
+		 * @since 0.1.0
+		 */
+		public function business_matchup_styles() {
+			wp_enqueue_style( 'business-matchups-style', plugin_dir_url(__FILE__).'../css/business-matchups.css' );
+		}
+
+
+		/**
+		 * business_matchup_sidebar_layout function
+		 * This function disables the sidebar if present on our custom post type pages.
+		 * 
+		 * @since 0.1.0
+		 * 
+		 * @param array $layout contains the global layout configuration for the site
+		 * @return arry $layout with the sidebar disabled
+		 */
+		public function business_matchup_sidebar_layout( $layout ) {
+			$post_types = array( 'business-matchups' );
+		
+			if ( in_array( get_post_type(), $post_types ) ) {
+				return 'no-sidebar';
+			}
+		
+			return $layout;
+		}
+
+		/**
 		 * business_matchup_content function
 		 * This function displays the gathered information from the Yelp API and Straw Poll API based on the 
 		 * information provided in the custom metaboxes for the content of the Custom Post Type Front End.
@@ -151,4 +181,92 @@
 			return $html;
 		}
         
+		/**
+		 * add_meta_box function
+		 * Creates custom metaboxes for our custom post type so we can allow users to enter the location and type of business
+		 * 
+		 * @since 0.1.0
+		 * 
+		 * @param string $post_type string the contains the post type
+		 */
+		public function add_meta_box( $post_type ) {
+			$post_types = array( 'business-matchups' );
+
+			if ( in_array( $post_type, $post_types ) ) {
+				add_meta_box(
+					'Business Location',
+					__( 'Business Location', 'business-matchups' ),
+					array( $this, 'render_meta_box_location_content' ),
+					$post_type,
+					'advanced',
+					'high'
+				);
+			}
+
+			if ( in_array( $post_type, $post_types ) ) {
+				add_meta_box(
+					'Business Type',
+					__( 'Business Type', 'business-matchups' ),
+					array( $this, 'render_meta_box_type_content' ),
+					$post_type,
+					'advanced',
+					'high'
+				);
+			}
+
+		}
+
+		/**
+		 * render_meta_box_location_content function
+		 * This function displays the custom metabox within the editor screen of the current post
+		 * to allow the user to provide a location in a City, ST format.
+		 * 
+		 * @since 0.1.0
+		 * 
+		 * @param array $post is the current array item containing the data for the current post.
+		 */
+		public function render_meta_box_location_content( $post ) {
+
+			wp_nonce_field( 'business_matchup_metabox', 'business_matchup_metabox_nonce' );
+
+			$bizLoc = get_post_meta( $post->ID, '_business_matchup_business_location', true );
+
+			?>
+			<label for="business-matchups-business-location">
+				<?php esc_html_e( 'City, State Abbreviate. Example: San Francisco, CA', 'business-matchups' ); ?>
+			</label>
+				
+			<input style="width:100%;" type="text" class="form-control" name="business-matchups-business-location" value="<?php esc_html_e( $bizLoc, 'business-matchups' ); ?>" /> 
+			<?php
+		}
+
+		/**
+		 * render_meta_box_type_content function
+		 * This function displays the custom metabox within the editor screen of the current post
+		 * to allow the user to provide a type of business. ie: Diner, Entertainment, etc...
+		 * 
+		 * @since 0.1.0
+		 * 
+		 * @param array $post is the current array item containing the data for the current post
+		 */
+		public function render_meta_box_type_content( $post ) {
+
+			$type = get_post_meta( $post->ID, '_business_matchup_type', true );
+			// $bizLoc = get_post_meta( $post->ID, '_business_matchup_business_location', true );
+
+			?>
+			<label for="business-matchups-type">
+				<?php esc_html_e( 'Entertainment, Restaurant, Fine Dining, Pizza, etc...', 'business-matchups' ); ?>
+			</label>
+
+			<input style="width:100%;" type="text" class="form-control" name="business-matchups-type" value="<?php esc_html_e( $type, 'business-matchups' ); ?>" />
+
+			<?php
+			$has_poll = get_post_meta( $post->ID, '_business_matchup_poll', true );
+			?>
+			<input style="width:100%;" type="hidden" class="form-control" name="business-matchups-poll" value="<?php esc_html_e( $has_poll, 'business-matchups' ); ?>" />
+			<?php
+		}
+
+
     }
