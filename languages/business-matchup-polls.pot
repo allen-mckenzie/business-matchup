@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-business-matchup-polls\n"
-"POT-Creation-Date: 2022-03-15 23:05:21+00:00\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/business-matchup\n"
+"POT-Creation-Date: 2022-03-19 05:09:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,153 +24,153 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: wp-business-matchup-polls.php:198
+#: includes/classes/class-business-matchup-cpt.php:24
 msgid "Add New"
 msgstr ""
 
-#: wp-business-matchup-polls.php:199
-msgid "Add New Business Matchup Poll"
+#: includes/classes/class-business-matchup-cpt.php:25
+msgid "Add New Business Matchup"
 msgstr ""
 
-#: wp-business-matchup-polls.php:200
-msgid "New Business Matchup Poll"
+#: includes/classes/class-business-matchup-cpt.php:26
+msgid "New Business Matchup"
 msgstr ""
 
-#: wp-business-matchup-polls.php:201
-msgid "Edit Business Matchup Poll"
+#: includes/classes/class-business-matchup-cpt.php:27
+msgid "Edit Business Matchup"
 msgstr ""
 
-#: wp-business-matchup-polls.php:202
-msgid "View Business Matchup Poll"
+#: includes/classes/class-business-matchup-cpt.php:28
+msgid "View Business Matchup"
 msgstr ""
 
-#: wp-business-matchup-polls.php:203
+#: includes/classes/class-business-matchup-cpt.php:29
 msgid "All Polls"
 msgstr ""
 
-#: wp-business-matchup-polls.php:204
-msgid "Search Business Matchup Polls"
+#: includes/classes/class-business-matchup-cpt.php:30
+msgid "Search Business Matchup"
 msgstr ""
 
-#: wp-business-matchup-polls.php:205
-msgid "Parent Business Matchup Polls:"
+#: includes/classes/class-business-matchup-cpt.php:31
+msgid "Parent Business Matchup:"
 msgstr ""
 
-#: wp-business-matchup-polls.php:206
-msgid "No Business Matchup Polls found."
+#: includes/classes/class-business-matchup-cpt.php:32
+msgid "No Business Matchup found."
 msgstr ""
 
-#: wp-business-matchup-polls.php:207
-msgid "No Business Matchup Polls found in Trash."
+#: includes/classes/class-business-matchup-cpt.php:33
+msgid "No Business Matchup found in Trash."
 msgstr ""
 
-#: wp-business-matchup-polls.php:252
+#: includes/classes/class-business-matchup-polls-page.php:198
 msgid "Business Location"
 msgstr ""
 
-#: wp-business-matchup-polls.php:263
+#: includes/classes/class-business-matchup-polls-page.php:209
 msgid "Business Type"
 msgstr ""
 
-#: wp-business-matchup-polls.php:331
+#: includes/classes/class-business-matchup-polls-page.php:236
 msgid "City, State Abbreviate. Example: San Francisco, CA"
 msgstr ""
 
-#: wp-business-matchup-polls.php:354
+#: includes/classes/class-business-matchup-polls-page.php:259
 msgid "Entertainment, Restaurant, Fine Dining, Pizza, etc..."
 msgstr ""
 
-#: wp-business-matchup-polls.php:442
+#: includes/classes/class-business-matchup-settings.php:79
 msgid "Your API Key's were saved."
 msgstr ""
 
-#: wp-business-matchup-polls.php:457
+#: includes/classes/class-business-matchup-settings.php:94
 msgid "Uh uh uh... you didn\\t say the magic word..."
 msgstr ""
 
-#: wp-business-matchup-polls.php:194
+#: includes/classes/class-business-matchup-cpt.php:20
 msgctxt "Post type general name"
-msgid "Business Matchup Polls"
+msgid "Business Matchups"
 msgstr ""
 
-#: wp-business-matchup-polls.php:195
+#: includes/classes/class-business-matchup-cpt.php:21
 msgctxt "Post type singular name"
-msgid "Business Matchup Poll"
+msgid "Business Matchups"
 msgstr ""
 
-#: wp-business-matchup-polls.php:196
+#: includes/classes/class-business-matchup-cpt.php:22
 msgctxt "Admin Menu text"
-msgid "Business Matchup Polls"
+msgid "Business Matchups"
 msgstr ""
 
-#: wp-business-matchup-polls.php:197
+#: includes/classes/class-business-matchup-cpt.php:23
 msgctxt "Add New on Toolbar"
-msgid "Business Matchup Poll"
+msgid "Business Matchups"
 msgstr ""
 
-#: wp-business-matchup-polls.php:208
+#: includes/classes/class-business-matchup-cpt.php:34
 msgctxt "Overrides the “Featured Image” phrase for this post type. Added in 4.3"
-msgid "Business Matchup Poll Cover Image"
+msgid "Business Matchup Cover Image"
 msgstr ""
 
-#: wp-business-matchup-polls.php:209
+#: includes/classes/class-business-matchup-cpt.php:35
 msgctxt "Overrides the “Set featured image” phrase for this post type. Added in 4.3"
 msgid "Set cover image"
 msgstr ""
 
-#: wp-business-matchup-polls.php:210
+#: includes/classes/class-business-matchup-cpt.php:36
 msgctxt ""
 "Overrides the “Remove featured image” phrase for this post type. Added in "
 "4.3"
 msgid "Remove cover image"
 msgstr ""
 
-#: wp-business-matchup-polls.php:211
+#: includes/classes/class-business-matchup-cpt.php:37
 msgctxt ""
 "Overrides the “Use as featured image” phrase for this post type. Added in "
 "4.3"
 msgid "Use as cover image"
 msgstr ""
 
-#: wp-business-matchup-polls.php:212
+#: includes/classes/class-business-matchup-cpt.php:38
 msgctxt ""
 "The post type archive label used in nav menus. Default “Post Archives”. "
 "Added in 4.4"
-msgid "Business Matchup Poll archives"
+msgid "Business Matchup archives"
 msgstr ""
 
-#: wp-business-matchup-polls.php:213
+#: includes/classes/class-business-matchup-cpt.php:39
 msgctxt ""
 "Overrides the “Insert into post”/”Insert into page” phrase (used when "
 "inserting media into a post). Added in 4.4"
-msgid "Insert into Business Matchup Poll"
+msgid "Insert into Business Matchup"
 msgstr ""
 
-#: wp-business-matchup-polls.php:214
+#: includes/classes/class-business-matchup-cpt.php:40
 msgctxt ""
 "Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used "
 "when viewing media attached to a post). Added in 4.4"
-msgid "Uploaded to this Business Matchup Poll"
+msgid "Uploaded to this Business Matchup"
 msgstr ""
 
-#: wp-business-matchup-polls.php:215
+#: includes/classes/class-business-matchup-cpt.php:41
 msgctxt ""
 "Screen reader text for the filter links heading on the post type listing "
 "screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4"
-msgid "Filter Business Matchup Polls list"
+msgid "Filter Business Matchup list"
 msgstr ""
 
-#: wp-business-matchup-polls.php:216
+#: includes/classes/class-business-matchup-cpt.php:42
 msgctxt ""
 "Screen reader text for the pagination heading on the post type listing "
 "screen. Default “Posts list navigation”/”Pages list navigation”. Added in "
 "4.4"
-msgid "Business Matchup Polls list navigation"
+msgid "Business Matchup list navigation"
 msgstr ""
 
-#: wp-business-matchup-polls.php:217
+#: includes/classes/class-business-matchup-cpt.php:43
 msgctxt ""
 "Screen reader text for the items list heading on the post type listing "
 "screen. Default “Posts list”/”Pages list”. Added in 4.4"
-msgid "Business Matchup Polls list"
+msgid "Business Matchup list"
 msgstr ""

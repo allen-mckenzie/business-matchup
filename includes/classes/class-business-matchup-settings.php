@@ -76,7 +76,7 @@
 		public function handleForm_admin_notice__success() {
 			?>
 			<div class="notice notice-success is-dismissible">
-				<p><?php esc_html_e( 'Your API Key\'s were saved.', 'business-matchups' ); ?></p>
+				<p><?php esc_html_e( 'Your API Key\'s were saved.', 'business-matchup-polls' ); ?></p>
 			</div>
 			<?php
 		}
@@ -91,7 +91,7 @@
 		public function handleForm_admin_notice__error() {
 			?>
 			<div class="notice notice-error">
-				<p><?php esc_html_e( 'Uh uh uh... you didn\t say the magic word...', 'business-matchups' ); ?></p>
+				<p><?php esc_html_e( 'Uh uh uh... you didn\t say the magic word...', 'business-matchup-polls' ); ?></p>
 			</div>
 			<?php
 		}
@@ -134,11 +134,11 @@
 						<?php wp_nonce_field( 'business_matchup', 'nonce' ); ?>
 						<label for="yelp_api_key"><p>Enter your Yelp API Key</p>
 						<div class="business_matchup__flex-container">    
-							<input style="width:100%" name="yelp_api_key" id="yelp_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'business_matchup_yelp_api' ) ), 'business-matchups' ); ?>" />
+							<input style="width:100%" name="yelp_api_key" id="yelp_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'business_matchup_yelp_api' ) ), 'business-matchup-polls' ); ?>" />
 						</div>
 						<label for="straw_poll_api_key"><p>Enter your Straw Poll API Key</p>
 						<div class="business_matchup__flex-container">
-							<input style="width:100%" name="straw_poll_api_key" id="straw_poll_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'business_matchup_straw_poll_api' ) ), 'business-matchups' ); ?>" />
+							<input style="width:100%" name="straw_poll_api_key" id="straw_poll_api_key" placeholder="aFMUqcUXCqlUbIn9uPn3x_" value="<?php esc_html_e( esc_textarea( get_option( 'business_matchup_straw_poll_api' ) ), 'business-matchup-polls' ); ?>" />
 						</div>
 						<br style="padding-bottom: 20px;"/>
 						<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">

@@ -195,7 +195,7 @@
 			if ( in_array( $post_type, $post_types ) ) {
 				add_meta_box(
 					'Business Location',
-					__( 'Business Location', 'business-matchups' ),
+					__( 'Business Location', 'business-matchup-polls' ),
 					array( $this, 'render_meta_box_location_content' ),
 					$post_type,
 					'advanced',
@@ -206,7 +206,7 @@
 			if ( in_array( $post_type, $post_types ) ) {
 				add_meta_box(
 					'Business Type',
-					__( 'Business Type', 'business-matchups' ),
+					__( 'Business Type', 'business-matchup-polls' ),
 					array( $this, 'render_meta_box_type_content' ),
 					$post_type,
 					'advanced',
@@ -233,10 +233,10 @@
 
 			?>
 			<label for="business-matchups-business-location">
-				<?php esc_html_e( 'City, State Abbreviate. Example: San Francisco, CA', 'business-matchups' ); ?>
+				<?php esc_html_e( 'City, State Abbreviate. Example: San Francisco, CA', 'business-matchup-polls' ); ?>
 			</label>
 				
-			<input style="width:100%;" type="text" class="form-control" name="business-matchups-business-location" value="<?php esc_html_e( $bizLoc, 'business-matchups' ); ?>" /> 
+			<input style="width:100%;" type="text" class="form-control" name="business-matchups-business-location" value="<?php esc_html_e( $bizLoc, 'business-matchup-polls' ); ?>" /> 
 			<?php
 		}
 
@@ -256,15 +256,15 @@
 
 			?>
 			<label for="business-matchups-type">
-				<?php esc_html_e( 'Entertainment, Restaurant, Fine Dining, Pizza, etc...', 'business-matchups' ); ?>
+				<?php esc_html_e( 'Entertainment, Restaurant, Fine Dining, Pizza, etc...', 'business-matchup-polls' ); ?>
 			</label>
 
-			<input style="width:100%;" type="text" class="form-control" name="business-matchups-type" value="<?php esc_html_e( $type, 'business-matchups' ); ?>" />
+			<input style="width:100%;" type="text" class="form-control" name="business-matchups-type" value="<?php esc_html_e( $type, 'business-matchup-polls' ); ?>" />
 
 			<?php
 			$has_poll = get_post_meta( $post->ID, '_business_matchup_poll', true );
 			?>
-			<input style="width:100%;" type="hidden" class="form-control" name="business-matchups-poll" value="<?php esc_html_e( $has_poll, 'business-matchups' ); ?>" />
+			<input style="width:100%;" type="hidden" class="form-control" name="business-matchups-poll" value="<?php esc_html_e( $has_poll, 'business-matchup-polls' ); ?>" />
 			<?php
 		}
 
