@@ -5,7 +5,7 @@
 **Requires at least:** 5.8    
 **Tested up to:** 5.9    
 **Requires PHP:** 7.0    
-**Stable tag:** 0.1.3
+**Stable tag:** 0.1.4
 **License:** GPLv3 or later    
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html    
 
@@ -87,6 +87,10 @@ Getting a Yelp API Key:
 ## Changelog ##
 
 Here is the Changelog
+
+### 0.1.4 ###
+
+Updated translations and bumped version to refresh zip file for review team.
 
 ### 0.1.3 ###
 
