@@ -5,7 +5,7 @@
 	 * Business_Matchup_CPT class
 	 * This class contains the functions needed to create our custom post type.
 	 * 
-	 * @since 0.1.3
+	 * @since 1.0.0
 	 */
     class Business_Matchup_CPT {
 
@@ -13,7 +13,7 @@
 		 * business_matchup_cpt function
 		 * This function sets up and creates the custom post type for the Business Matchup Polls.
 		 * 
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 */
 		public function business_matchup_cpt() {
 			$labels = array(

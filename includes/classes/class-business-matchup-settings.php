@@ -8,7 +8,7 @@
 		 * This function takes the submitted form information from the custom post type editor screen
 		 * and verifies the entered data before saving them as postmeta entries in the database for the current post.
 		 * 
-		 * @since 0.1.3
+		 * @since 1.0.0
 		 * 
 		 * @param integer $post_id contains the id number of the current post
 		 * @return integer $post_id if performing verification fails or if performing an autosave
@@ -48,7 +48,7 @@
 		 * bm_menu function
 		 * This function creates a new admin menu item to allow users to enter their Yelp and StrawPoll API keys.
 		 * 
-		 * @since 0.1.3
+		 * @since 1.0.0
 		 */
 		public function bm_menu() {
 			add_menu_page( 'Business Matchup Settings', 'Business Matchup Settings', 'manage_options', 'business-matchups', array( $this, 'bmForm' ), 'dashicons-admin-generic', 0 );
@@ -60,7 +60,7 @@
 		 * settings function
 		 * This function creates custom setting fields that our new menu will use to store credentials.
 		 * 
-		 * @since 0.1.3
+		 * @since 1.0.0
 		 */
 		public function settings() {
 			add_settings_section( 'business_matchup_settings_section', null, null, 'business-matchups-options' );
@@ -71,7 +71,7 @@
 		 * handleForm_admin_notice__success function
 		 * This function handles the output and display of custom admin notices upon submitting the credentials in the settings menu.
 		 * 
-		 * @since 0.1.3
+		 * @since 1.0.0
 		 */
 		public function handleForm_admin_notice__success() {
 			?>
@@ -86,7 +86,7 @@
 		 * This function handles the output and display of custom admin notices upon submitting the credentials in the settings menu
 		 * without passing a valid nonce.
 		 * 
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 */
 		public function handleForm_admin_notice__error() {
 			?>
@@ -100,7 +100,7 @@
 		 * handleForm function
 		 * This function processes and validates the information submitted in our new settings menu
 		 * 
-		 * @since 0.1.3
+		 * @since 1.0.0
 		 */
 		public function handleForm() {
 			if ( wp_verify_nonce( filter_input( INPUT_POST, 'nonce'), 'business_matchup' ) AND current_user_can( 'manage_options' ) ) {
@@ -118,7 +118,7 @@
 		 * This function generates the form used in the settings menu to allow users to submit the credentials. That input is then
 		 * passed to the handleForm function and stored into the options table to be used while making API calls to Yelp and StrawPoll.
 		 * 
-		 * @since 0.1.3
+		 * @since 1.0.0
 		 */
 		public function bmForm() {
 			?>
@@ -151,7 +151,7 @@
 		 * optionsSubPage function
 		 * This function help define our new settings page in our new custom menu item to help users easily find where to enter their credentials.
 		 * 
-		 * @since 0.1.3
+		 * @since 1.0.0
 		 */
 		public function optionsSubPage() {
 			?>
