@@ -49,9 +49,7 @@ Getting a Yelp API Key:
 ### What about my StrawPoll API Key ###
 
 1.  If you don't already have a Straw Poll account go to: https://strawpoll.com/en/signup/ and signup.
-
 2.  Once you are logged in go to: https://strawpoll.com/account/settings/
-
 3.  Then click the Generate new key if you don't see a key there otherwise click the Show link and copy your API key.
 
 ### How do I create a Business Matchup Poll ###
