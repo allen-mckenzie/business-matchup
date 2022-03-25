@@ -1,7 +1,7 @@
 <?php
 	/**
 		* Plugin Name:       Business Matchup
-		* Plugin URI:        https://wordpress.org/plugins/business-matchup
+		* Plugin URI:        https://wordpress.org/plugins/business-matchup/
 		* Description:       Create custom polls using Yelp and Straw Polls to let your followers vote for which business they think is the best.
 		* Version:           1.0.0
 		* Requires at least: 5.5
@@ -13,14 +13,14 @@
 		* License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 		* Update URI:        https://wordpress.org/plugins/business-matchup
 		* Text Domain:       business-matchups
-		* Domain Path:       /languages
+		* Domain Path:       /languages/
 		*
 		* @package         Business_Matchup
 	*/
 
 	if( !defined( 'ABSPATH' ) ) return; // None shall pass
 
-	require 'vendor/autoload.php'; // Require the composer autoloader
+	require realpath( plugin_dir_path( __FILE__ ) . 'vendor/autoload.php' ); // Require the composer autoloader
 
 	/**
 	 * Define the Business Matchup Polls Plugin Dir
