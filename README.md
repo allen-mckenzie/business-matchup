@@ -9,7 +9,9 @@
 **License:** GPLv3 or later    
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html    
 
-This plugin will access the Yelp API and StrawPoll API to create polls based on a specific business category and city location that can then be shared to social media allowing your followers to engage and vote for which business they think is the best
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/8973b77e54ac419cbde622f67bae4f70)](https://www.codacy.com/gh/allen-mckenzie/business-matchup/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=allen-mckenzie/business-matchup&amp;utm_campaign=Badge_Grade)
+
+This plugin will access the Yelp API and StrawPoll API to create polls based on a specific business category and city location that can then be shared to social media.
 
 ## Description ##
 
