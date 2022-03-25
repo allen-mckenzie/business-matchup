@@ -1,9 +1,9 @@
 <?php
 	/**
 		* Plugin Name:       Business Matchup
-		* Plugin URI:        https://github.com/allen-mckenzie/business-matchup
+		* Plugin URI:        https://wordpress.org/plugins/business-matchup/
 		* Description:       Create custom polls using Yelp and Straw Polls to let your followers vote for which business they think is the best.
-		* Version:           0.1.4
+		* Version:           1.0.0
 		* Requires at least: 5.5
 		* Requires PHP:      7.0
 		* Author:            Allen McKenzie
@@ -11,21 +11,21 @@
 		* Author URI:        https://github.com/allen-mckenzie
 		* License:           GPL v3 or later
 		* License URI:       https://www.gnu.org/licenses/gpl-3.0.html
-		* Update URI:        https://github.com/allen-mckenzie/business-matchup/releases
+		* Update URI:        https://wordpress.org/plugins/business-matchup
 		* Text Domain:       business-matchups
-		* Domain Path:       /languages
+		* Domain Path:       /languages/
 		*
 		* @package         Business_Matchup
 	*/
 
 	if( !defined( 'ABSPATH' ) ) return; // None shall pass
 
-	require 'vendor/autoload.php'; // Require the composer autoloader
+	require realpath( plugin_dir_path( __FILE__ ) . 'vendor/autoload.php' ); // Require the composer autoloader
 
 	/**
 	 * Define the Business Matchup Polls Plugin Dir
 	 * 
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	define( 'BUSINESS_MATCHUP_POLLS__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
@@ -33,7 +33,7 @@
 	 * Business_Matchup Class definition
 	 * This is the main class for the plugin
 	 * 
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 */
 	final class Business_Matchup {
 
@@ -46,7 +46,7 @@
 		 * hooks function
 		 * Plugin intialization action, filters, and hooks go here
 		 * 
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 */
 		public function hooks() {
 			$businessMatchupSettings = new \BusinessMatchup\Business_Matchup_Settings();
@@ -72,7 +72,7 @@
 		 * to force WordPress to refresh the permalinks in preparation of creating
 		 * our custom post type.
 		 * 
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 */
 		public function activate() {
 			update_option('plugin_permalinks_flushed', 0);
@@ -82,7 +82,7 @@
 		 * get_instance function
 		 * This helps set up the single instance of our new class
 		 * 
-		 * @since 0.1.0
+		 * @since 1.0.0
 		 * 
 		 * @return self::$single_instance of the class
 		 */
@@ -100,7 +100,7 @@
 	 * businessMatchup function
 	 * This function helps create and standup our class
 	 * 
-	 * @since 0.1.0
+	 * @since 1.0.0
 	 * 
 	 * @return class Business_Matchup instance
 	 */

@@ -5,7 +5,7 @@ Tags: Yelp, Polls, Community Engagement
 Requires at least: 5.8  
 Tested up to: 5.9  
 Requires PHP: 7.0  
-Stable tag: 0.1.4
+Stable tag: 1.0.0
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -90,40 +90,6 @@ Getting a Yelp API Key:
 
 Here is the Changelog
 
-=== 0.1.4 ===
+=== 1.0.0 ===
 
-Updated translations and bumped version to refresh zip file for review team.
-
-=== 0.1.3 ===
-
-Enhancement use composer autoloader to define and load classes
-Corrections updated README.md and README.txt to have new lines after line itemes
-Cleanup refactored functions and defined new classes to limit the number of nongetter and setters
-
-=== 0.1.2 ===
-
-Fixed declared default constants to have unique 4 letter prefixes.
-
-=== 0.1.1 ===
-
-Fixed declared default constants to have unique prefixes. Instead of API_KEY this plugin uses the prefix BM_ to make this BM_API_KEY
-Added assets for the plugin icon and banner images
-Added documentation for plugin configuration and integration with Yelp and StrawPoll
-
-=== 0.1.0 ===
-
-Code cleanup and prep for the first release and review
-
-=== 0.0.3 ===
-
-Added initial configuration hooks for Yelp API and StrawPoll API integration.
-Fixed custom post type slug to be business-matchup-poll and business-matchup-polls respectively.
-Bug: relocating settings section into the post type management section soon.
-
-=== 0.0.2 ===
-
-Code audit to properly escape and filter outputs using best practices ( Issues flagged by Codacy )
-
-=== 0.0.1 ===
-
-This is the initial shell for the plugin. It creates the custom post type and metaboxes that will be used by the API integrations later.
+Initial release!
