@@ -60,8 +60,8 @@
 			$city = $bizLoc_array[0];
 			$response_body = json_decode( get_post_meta( $postID, '_business_matchup_yelp_results', true ), true );
 			$pollitems = $business_matchup_page->buildPollItems($response_body);
-			$content = '<section id="business-matchups">';
 			if ($post->post_type == 'business-matchups') {
+				$content = '<section id="business-matchups">';
 				$content .= '
 					<div id="business-matchups-title">
 						<h1> '.$type.' locations near '.$city.'</h1>
