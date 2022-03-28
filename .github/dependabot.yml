@@ -20,7 +20,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-      day: "sundy"
+      day: "sunday"
     assignees:
       - "allen-mckenzie"
     commit-message:
